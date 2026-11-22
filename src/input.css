@@ -833,3 +833,49 @@
   animation: violetHaloPulse 4.2s ease-in-out infinite;
   will-change: transform, opacity;
 }
+
+.rightward-3d-track {
+  perspective: 1400px;
+  perspective-origin: 50% 45%;
+}
+
+.rightward-3d-item {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transform: translate3d(
+      var(--r3d-x, 0px),
+      var(--r3d-y, 0px),
+      var(--r3d-z, 0px)
+    )
+    rotateX(var(--r3d-rx, 0deg)) rotateY(var(--r3d-ry, 0deg))
+    scale(var(--r3d-scale, 1));
+}
+
+.derail-3d-viewport {
+  perspective: 1500px;
+  perspective-origin: 35% 40%;
+}
+
+.derail-3d-stage {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transform: translate3d(
+      var(--stage-x, 0px),
+      var(--stage-y, 0px),
+      var(--stage-z, 0px)
+    )
+    rotateX(var(--stage-rx, 0deg)) rotateY(var(--stage-ry, 0deg))
+    rotateZ(var(--stage-rz, 0deg));
+}
+
+.derail-3d-prop {
+  transform-style: preserve-3d;
+  will-change: transform;
+  transform: translate3d(
+      var(--prop-x, 0px),
+      var(--prop-y, 0px),
+      var(--prop-z, 0px)
+    )
+    rotateX(var(--prop-rx, 0deg)) rotateY(var(--prop-ry, 0deg))
+    rotateZ(var(--prop-rz, 0deg)) scale(var(--prop-scale, 1));
+}
