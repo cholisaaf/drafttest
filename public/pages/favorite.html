@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Favorite — Chronicles of Us</title>
-    <!-- Sesuaikan path output.css dengan lokasi file CSS hasil build Tailwind v4 -->
+    <!-- Sesuaikan path CSS dengan struktur folder kamu -->
     <link rel="stylesheet" href="../../src/css/output.css" />
+    <link rel="stylesheet" href="../../src/css/customfavorite.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -14,13 +15,28 @@
     />
   </head>
   <body
-    class="bg-[#181210] text-[#f5efe6] font-sans antialiased overflow-x-hidden selection:bg-amber-800/30 selection:text-amber-100"
+    class="bg-[#181210] text-[#f5efe6] font-sans antialiased overflow-x-clip selection:bg-purple-800/35 selection:text-purple-100"
   >
+    <!-- Lagu otomatis diputar & loop saat tombol Buka Pesan diklik (letakkan file audio di assets/sound/) -->
+    <audio
+      id="birthday-song-audio"
+      src="../../assets/sound/Adrianne_Lenker_-_anything_(mp3.pm).mp3"
+      preload="auto"
+      loop
+    ></audio>
+
+    <!-- Layer Khusus Partikel Interaktif -->
+    <div
+      id="romantic-particles-layer"
+      class="pointer-events-none fixed inset-0 z-[9999] overflow-hidden"
+      aria-hidden="true"
+    ></div>
+
     <div
       id="main-website"
-      class="section-blend-canvas min-h-dvh text-[#f5efe6] flex flex-col relative"
+      class="fav-canvas min-h-dvh text-[#f5efe6] flex flex-col relative overflow-x-clip"
     >
-      <!-- Navbar Paten (z-40 di atas tirai z-20) -->
+      <!-- Navbar Paten -->
       <header
         class="fixed top-0 inset-x-0 z-40 bg-[#181210]/90 backdrop-blur-md border-b border-amber-200/10"
       >
@@ -31,7 +47,7 @@
             href="../../index.html"
             class="font-display text-base sm:text-xl tracking-wider text-amber-200 flex items-center gap-2 sm:gap-2.5 truncate"
           >
-            <span class="text-red-500 text-xs sm:text-sm shrink-0">✦</span>
+            <span class="text-purple-400 text-xs sm:text-sm shrink-0">✦</span>
             <span class="truncate">Chronicles of Us</span>
           </a>
 
@@ -39,24 +55,24 @@
             class="hidden md:flex items-center gap-7 font-serif text-lg text-amber-100/75"
           >
             <a
-              href="../../index.html#babak-kisah"
-              class="hover:text-amber-300 transition-colors"
-              >Babak Kisah</a
+              href="#kupu-kupu-ungu-3d"
+              class="hover:text-purple-300 transition-colors"
+              >Kupu-Kupu 3D</a
             >
             <a
-              href="../../index.html#lagu-favorit"
-              class="hover:text-amber-300 transition-colors"
-              >Lagu Favorit</a
+              href="#potret-dia"
+              class="hover:text-purple-300 transition-colors"
+              >Potret Dia</a
             >
             <a
-              href="../../index.html#janji-abadi"
-              class="hover:text-amber-300 transition-colors"
-              >Janji & Harapan</a
+              href="#kenangan-kita"
+              class="hover:text-purple-300 transition-colors"
+              >Kenangan</a
             >
             <a
-              href="../../index.html#penutup"
-              class="hover:text-amber-300 transition-colors"
-              >Catatan Akhir</a
+              href="#section-button-3d"
+              class="hover:text-purple-300 transition-colors"
+              >Buka Pesan</a
             >
           </nav>
 
@@ -70,7 +86,7 @@
         </div>
       </header>
 
-      <!-- Tirai Terbuka di Belakang Navbar (z-20, mulai dari bawah tinggi navbar) -->
+      <!-- Tirai Terbuka di Belakang Navbar -->
       <div
         id="entry-curtain-overlay"
         aria-hidden="true"
@@ -103,306 +119,751 @@
         </div>
       </div>
 
-      <!-- Area Konten Utama (Belum Ada Isinya, diberi padding-top agar tidak tertutup navbar fixed) -->
+      <!-- Viewport Lintasan Diagonal Kiri-Atas -> Tengah -> Kanan-Bawah -->
       <main
-        class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-8 pt-24 md:pt-28 pb-16 sm:pb-24"
+        class="diagonal-track-viewport flex-1 w-full max-w-6xl mx-auto px-4 sm:px-8 pt-20 md:pt-24 pb-20 sm:pb-28 overflow-x-clip"
       >
         <!-- ===============================================================
-     ELEMEN KUPU-KUPU UNGU 3D INTERAKTIF (ROTASI 360 DERAJAT)
-================================================================ -->
-        <!-- ===============================================================
-     ELEMEN KUPU-KUPU UNGU 3D INTERAKTIF (ROTASI 360 DERAJAT)
-================================================================ -->
+             1. KUPU-KUPU UNGU 3D INTERAKTIF — FULL SCREEN (100dvh)
+        ================================================================ -->
         <section
           id="kupu-kupu-ungu-3d"
+          data-track-node
+          data-track-index="0"
           aria-label="Kupu-Kupu Ungu 3D Interaktif"
-          class="relative py-14 sm:py-24 px-4 sm:px-8 flex flex-col items-center justify-center overflow-x-clip"
+          class="diagonal-track-node min-h-dvh lg:h-dvh lg:min-h-0 -mt-20 md:-mt-24 pt-20 md:pt-28 pb-6 lg:pb-10 px-2 sm:px-8 flex flex-col items-center justify-between relative"
         >
-          <!-- Aura cahaya ungu & emas lembut (tanpa blur-2xl agar tidak ada tepi kotak terpotong di mobile) -->
           <div
             aria-hidden="true"
             class="butterfly-violet-aura pointer-events-none absolute top-1/2 left-1/2 w-[250px] h-[250px] sm:w-[520px] sm:h-[520px] rounded-full bg-[radial-gradient(circle_at_center,rgba(192,132,252,0.22)_0%,rgba(126,34,206,0.12)_34%,rgba(251,191,36,0.04)_52%,rgba(24,18,16,0)_68%)]"
           ></div>
 
-          <!-- Cincin orbit tipis beraksen ungu & emas -->
           <div
             aria-hidden="true"
             class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] sm:w-[390px] sm:h-[390px] rounded-full border border-purple-300/15 shadow-[inset_0_0_32px_rgba(192,132,252,0.05)]"
           ></div>
 
-          <!-- Arena Sentuh & Rotasi 360 Derajat -->
           <div
-            id="butterfly-3d-stage"
-            role="img"
-            tabindex="0"
-            aria-label="Kupu-kupu ungu 3 dimensi, sentuh dan geser untuk memutar 360 derajat"
-            class="butterfly-3d-stage relative z-10 w-full max-w-md h-[220px] sm:h-[310px] flex items-center justify-center cursor-grab active:cursor-grabbing rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-300/50"
+            class="relative z-10 flex-1 w-full flex flex-col items-center justify-center pt-3 lg:pt-5"
           >
-            <div id="butterfly-3d-pivot" class="butterfly-3d-pivot">
-              <!-- Sayap Kiri 3D -->
-              <div class="butterfly-wing-left">
-                <svg
-                  viewBox="0 0 180 220"
-                  class="w-full h-full overflow-visible drop-shadow-[0_12px_24px_rgba(88,28,135,0.5)]"
-                >
-                  <defs>
-                    <linearGradient
-                      id="wingLeftGrad"
-                      x1="100%"
-                      y1="0%"
-                      x2="0%"
-                      y2="100%"
-                    >
-                      <stop offset="0%" stop-color="#e9d5ff" />
-                      <stop offset="28%" stop-color="#a855f7" />
-                      <stop offset="68%" stop-color="#6b21a8" />
-                      <stop offset="100%" stop-color="#2e1065" />
-                    </linearGradient>
-                    <linearGradient
-                      id="goldVeinGrad"
-                      x1="0%"
-                      y1="0%"
-                      x2="100%"
-                      y2="100%"
-                    >
-                      <stop
-                        offset="0%"
-                        stop-color="#fef08a"
-                        stop-opacity="0.9"
-                      />
-                      <stop
-                        offset="60%"
-                        stop-color="#f59e0b"
-                        stop-opacity="0.55"
-                      />
-                      <stop
-                        offset="100%"
-                        stop-color="#fde68a"
-                        stop-opacity="0.15"
-                      />
-                    </linearGradient>
-                  </defs>
+            <div
+              id="butterfly-3d-stage"
+              role="img"
+              tabindex="0"
+              aria-label="Kupu-kupu ungu 3 dimensi, sentuh dan geser untuk memutar 360 derajat"
+              class="butterfly-3d-stage relative z-10 w-full max-w-md h-[190px] sm:h-[245px] lg:h-[260px] flex items-center justify-center cursor-grab active:cursor-grabbing rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-300/50"
+            >
+              <div id="butterfly-3d-pivot" class="butterfly-3d-pivot">
+                <!-- Sayap Kiri 3D -->
+                <div class="butterfly-wing-left">
+                  <svg
+                    viewBox="0 0 180 220"
+                    class="w-full h-full overflow-visible drop-shadow-[0_12px_24px_rgba(88,28,135,0.5)]"
+                  >
+                    <defs>
+                      <linearGradient
+                        id="wingLeftGrad"
+                        x1="100%"
+                        y1="0%"
+                        x2="0%"
+                        y2="100%"
+                      >
+                        <stop offset="0%" stop-color="#e9d5ff" />
+                        <stop offset="28%" stop-color="#a855f7" />
+                        <stop offset="68%" stop-color="#6b21a8" />
+                        <stop offset="100%" stop-color="#2e1065" />
+                      </linearGradient>
+                      <linearGradient
+                        id="goldVeinGrad"
+                        x1="0%"
+                        y1="0%"
+                        x2="100%"
+                        y2="100%"
+                      >
+                        <stop
+                          offset="0%"
+                          stop-color="#fef08a"
+                          stop-opacity="0.9"
+                        />
+                        <stop
+                          offset="60%"
+                          stop-color="#f59e0b"
+                          stop-opacity="0.55"
+                        />
+                        <stop
+                          offset="100%"
+                          stop-color="#fde68a"
+                          stop-opacity="0.15"
+                        />
+                      </linearGradient>
+                    </defs>
 
-                  <path
-                    d="M178 96 C152 24, 66 -2, 16 26 C-8 40, 4 86, 48 106 C86 122, 146 114, 178 96 Z"
-                    fill="url(#wingLeftGrad)"
-                    stroke="url(#goldVeinGrad)"
-                    stroke-width="2"
-                  />
-                  <path
-                    d="M178 106 C142 112, 62 114, 34 152 C14 178, 42 212, 86 202 C128 192, 162 152, 178 106 Z"
-                    fill="url(#wingLeftGrad)"
-                    stroke="url(#goldVeinGrad)"
-                    stroke-width="1.8"
-                  />
+                    <path
+                      d="M178 96 C152 24, 66 -2, 16 26 C-8 40, 4 86, 48 106 C86 122, 146 114, 178 96 Z"
+                      fill="url(#wingLeftGrad)"
+                      stroke="url(#goldVeinGrad)"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M178 106 C142 112, 62 114, 34 152 C14 178, 42 212, 86 202 C128 192, 162 152, 178 106 Z"
+                      fill="url(#wingLeftGrad)"
+                      stroke="url(#goldVeinGrad)"
+                      stroke-width="1.8"
+                    />
 
-                  <circle
-                    cx="56"
-                    cy="54"
-                    r="11"
-                    fill="#f3e8ff"
-                    opacity="0.55"
-                  />
-                  <circle cx="56" cy="54" r="5" fill="#fde68a" opacity="0.85" />
-                  <circle cx="32" cy="74" r="6" fill="#e9d5ff" opacity="0.65" />
-                  <circle
-                    cx="72"
-                    cy="166"
-                    r="9"
-                    fill="#f3e8ff"
-                    opacity="0.45"
-                  />
-                  <circle cx="72" cy="166" r="4" fill="#fde68a" opacity="0.8" />
+                    <circle
+                      cx="56"
+                      cy="54"
+                      r="11"
+                      fill="#f3e8ff"
+                      opacity="0.55"
+                    />
+                    <circle
+                      cx="56"
+                      cy="54"
+                      r="5"
+                      fill="#fde68a"
+                      opacity="0.85"
+                    />
+                    <circle
+                      cx="32"
+                      cy="74"
+                      r="6"
+                      fill="#e9d5ff"
+                      opacity="0.65"
+                    />
+                    <circle
+                      cx="72"
+                      cy="166"
+                      r="9"
+                      fill="#f3e8ff"
+                      opacity="0.45"
+                    />
+                    <circle
+                      cx="72"
+                      cy="166"
+                      r="4"
+                      fill="#fde68a"
+                      opacity="0.8"
+                    />
 
-                  <path
-                    d="M174 98 C132 76, 86 58, 34 44 M174 101 C126 92, 82 86, 30 84 M174 106 C132 128, 92 150, 54 178"
-                    fill="none"
-                    stroke="url(#goldVeinGrad)"
-                    stroke-width="1.2"
-                  />
-                </svg>
-              </div>
+                    <path
+                      d="M174 98 C132 76, 86 58, 34 44 M174 101 C126 92, 82 86, 30 84 M174 106 C132 128, 92 150, 54 178"
+                      fill="none"
+                      stroke="url(#goldVeinGrad)"
+                      stroke-width="1.2"
+                    />
+                  </svg>
+                </div>
 
-              <!-- Sayap Kanan 3D -->
-              <div class="butterfly-wing-right">
-                <svg
-                  viewBox="0 0 180 220"
-                  class="w-full h-full overflow-visible drop-shadow-[0_12px_24px_rgba(88,28,135,0.5)]"
-                  style="transform: scaleX(-1)"
-                >
-                  <defs>
-                    <linearGradient
-                      id="wingRightGrad"
-                      x1="100%"
-                      y1="0%"
-                      x2="0%"
-                      y2="100%"
-                    >
-                      <stop offset="0%" stop-color="#e9d5ff" />
-                      <stop offset="28%" stop-color="#a855f7" />
-                      <stop offset="68%" stop-color="#6b21a8" />
-                      <stop offset="100%" stop-color="#2e1065" />
-                    </linearGradient>
-                  </defs>
+                <!-- Sayap Kanan 3D -->
+                <div class="butterfly-wing-right">
+                  <svg
+                    viewBox="0 0 180 220"
+                    class="w-full h-full overflow-visible drop-shadow-[0_12px_24px_rgba(88,28,135,0.5)]"
+                    style="transform: scaleX(-1)"
+                  >
+                    <defs>
+                      <linearGradient
+                        id="wingRightGrad"
+                        x1="100%"
+                        y1="0%"
+                        x2="0%"
+                        y2="100%"
+                      >
+                        <stop offset="0%" stop-color="#e9d5ff" />
+                        <stop offset="28%" stop-color="#a855f7" />
+                        <stop offset="68%" stop-color="#6b21a8" />
+                        <stop offset="100%" stop-color="#2e1065" />
+                      </linearGradient>
+                    </defs>
 
-                  <path
-                    d="M178 96 C152 24, 66 -2, 16 26 C-8 40, 4 86, 48 106 C86 122, 146 114, 178 96 Z"
-                    fill="url(#wingRightGrad)"
-                    stroke="url(#goldVeinGrad)"
-                    stroke-width="2"
-                  />
-                  <path
-                    d="M178 106 C142 112, 62 114, 34 152 C14 178, 42 212, 86 202 C128 192, 162 152, 178 106 Z"
-                    fill="url(#wingRightGrad)"
-                    stroke="url(#goldVeinGrad)"
-                    stroke-width="1.8"
-                  />
+                    <path
+                      d="M178 96 C152 24, 66 -2, 16 26 C-8 40, 4 86, 48 106 C86 122, 146 114, 178 96 Z"
+                      fill="url(#wingRightGrad)"
+                      stroke="url(#goldVeinGrad)"
+                      stroke-width="2"
+                    />
+                    <path
+                      d="M178 106 C142 112, 62 114, 34 152 C14 178, 42 212, 86 202 C128 192, 162 152, 178 106 Z"
+                      fill="url(#wingRightGrad)"
+                      stroke="url(#goldVeinGrad)"
+                      stroke-width="1.8"
+                    />
 
-                  <circle
-                    cx="56"
-                    cy="54"
-                    r="11"
-                    fill="#f3e8ff"
-                    opacity="0.55"
-                  />
-                  <circle cx="56" cy="54" r="5" fill="#fde68a" opacity="0.85" />
-                  <circle cx="32" cy="74" r="6" fill="#e9d5ff" opacity="0.65" />
-                  <circle
-                    cx="72"
-                    cy="166"
-                    r="9"
-                    fill="#f3e8ff"
-                    opacity="0.45"
-                  />
-                  <circle cx="72" cy="166" r="4" fill="#fde68a" opacity="0.8" />
+                    <circle
+                      cx="56"
+                      cy="54"
+                      r="11"
+                      fill="#f3e8ff"
+                      opacity="0.55"
+                    />
+                    <circle
+                      cx="56"
+                      cy="54"
+                      r="5"
+                      fill="#fde68a"
+                      opacity="0.85"
+                    />
+                    <circle
+                      cx="32"
+                      cy="74"
+                      r="6"
+                      fill="#e9d5ff"
+                      opacity="0.65"
+                    />
+                    <circle
+                      cx="72"
+                      cy="166"
+                      r="9"
+                      fill="#f3e8ff"
+                      opacity="0.45"
+                    />
+                    <circle
+                      cx="72"
+                      cy="166"
+                      r="4"
+                      fill="#fde68a"
+                      opacity="0.8"
+                    />
 
-                  <path
-                    d="M174 98 C132 76, 86 58, 34 44 M174 101 C126 92, 82 86, 30 84 M174 106 C132 128, 92 150, 54 178"
-                    fill="none"
-                    stroke="url(#goldVeinGrad)"
-                    stroke-width="1.2"
-                  />
-                </svg>
-              </div>
+                    <path
+                      d="M174 98 C132 76, 86 58, 34 44 M174 101 C126 92, 82 86, 30 84 M174 106 C132 128, 92 150, 54 178"
+                      fill="none"
+                      stroke="url(#goldVeinGrad)"
+                      stroke-width="1.2"
+                    />
+                  </svg>
+                </div>
 
-              <!-- Tubuh & Antena Emas-Ungu 3D -->
-              <div class="butterfly-body-3d">
-                <svg
-                  viewBox="0 0 60 150"
-                  class="w-10 sm:w-14 h-24 sm:h-36 overflow-visible"
-                >
-                  <path
-                    d="M27 32 C18 12, 8 6, 4 10"
-                    fill="none"
-                    stroke="#fbbf24"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                  <circle cx="4" cy="10" r="3" fill="#fde68a" />
+                <!-- Tubuh & Antena Emas-Ungu 3D -->
+                <div class="butterfly-body-3d">
+                  <svg
+                    viewBox="0 0 60 150"
+                    class="w-10 sm:w-14 h-24 sm:h-36 overflow-visible"
+                  >
+                    <path
+                      d="M27 32 C18 12, 8 6, 4 10"
+                      fill="none"
+                      stroke="#fbbf24"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="4" cy="10" r="3" fill="#fde68a" />
 
-                  <path
-                    d="M33 32 C42 12, 52 6, 56 10"
-                    fill="none"
-                    stroke="#fbbf24"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                  <circle cx="56" cy="10" r="3" fill="#fde68a" />
+                    <path
+                      d="M33 32 C42 12, 52 6, 56 10"
+                      fill="none"
+                      stroke="#fbbf24"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="56" cy="10" r="3" fill="#fde68a" />
 
-                  <ellipse
-                    cx="30"
-                    cy="36"
-                    rx="6.5"
-                    ry="7.5"
-                    fill="#3b0764"
-                    stroke="#f59e0b"
-                    stroke-width="1.2"
-                  />
-                  <ellipse
-                    cx="30"
-                    cy="56"
-                    rx="8.5"
-                    ry="15"
-                    fill="#4c1d95"
-                    stroke="#fbbf24"
-                    stroke-width="1.3"
-                  />
+                    <ellipse
+                      cx="30"
+                      cy="36"
+                      rx="6.5"
+                      ry="7.5"
+                      fill="#3b0764"
+                      stroke="#f59e0b"
+                      stroke-width="1.2"
+                    />
+                    <ellipse
+                      cx="30"
+                      cy="56"
+                      rx="8.5"
+                      ry="15"
+                      fill="#4c1d95"
+                      stroke="#fbbf24"
+                      stroke-width="1.3"
+                    />
 
-                  <ellipse cx="30" cy="82" rx="6.5" ry="10" fill="#3b0764" />
-                  <ellipse cx="30" cy="96" rx="5.5" ry="8" fill="#581c87" />
-                  <ellipse cx="30" cy="109" rx="4.2" ry="7" fill="#3b0764" />
-                  <ellipse
-                    cx="30"
-                    cy="120"
-                    rx="2.6"
-                    ry="5"
-                    fill="#fbbf24"
-                    opacity="0.85"
-                  />
-                </svg>
+                    <ellipse cx="30" cy="82" rx="6.5" ry="10" fill="#3b0764" />
+                    <ellipse cx="30" cy="96" rx="5.5" ry="8" fill="#581c87" />
+                    <ellipse cx="30" cy="109" rx="4.2" ry="7" fill="#3b0764" />
+                    <ellipse
+                      cx="30"
+                      cy="120"
+                      rx="2.6"
+                      ry="5"
+                      fill="#fbbf24"
+                      opacity="0.85"
+                    />
+                  </svg>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Petunjuk Sentuh / Rotasi 360° -->
-          <div
-            class="relative z-10 mt-3 flex flex-wrap items-center justify-center gap-2.5"
-          >
-            <span
-              id="butterfly-angle-readout"
-              class="font-sans text-[11px] tracking-[0.18em] uppercase text-purple-200/80 bg-purple-950/55 border border-purple-300/20 px-3 py-1 rounded-full"
+            <div
+              class="relative z-10 mt-2 flex flex-wrap items-center justify-center gap-2.5"
             >
-              Sentuh & Putar 360° • 0°
-            </span>
-            <button
-              id="butterfly-reset-btn"
-              type="button"
-              class="font-serif text-xs sm:text-sm text-amber-200/85 hover:text-amber-100 bg-[#221a17]/90 hover:bg-[#2c201b] border border-amber-300/25 px-3.5 py-1 rounded-full transition-all cursor-pointer"
-            >
-              Reset Posisi
-            </button>
-          </div>
-
-          <!-- Plakat Mewah Tulisan di Bawah Kupu-Kupu -->
-          <div
-            class="relative z-10 mt-7 sm:mt-10 max-w-2xl w-full text-center px-5 py-6 sm:px-10 sm:py-9 rounded-3xl bg-gradient-to-b from-[#251829]/90 via-[#1e1518]/92 to-[#181210]/95 border border-purple-300/25 shadow-[0_24px_60px_rgba(0,0,0,0.7),inset_0_1px_1px_rgba(243,232,255,0.2)] backdrop-blur-md"
-          >
-            <div class="flex items-center justify-center gap-2.5 sm:gap-3 mb-2">
               <span
-                class="h-[1px] w-7 sm:w-10 bg-gradient-to-r from-transparent to-purple-300/50"
-              ></span>
-              <span
-                class="font-display text-[10px] sm:text-xs tracking-[0.26em] sm:tracking-[0.3em] uppercase text-purple-300/85"
+                id="butterfly-angle-readout"
+                class="font-sans text-[11px] tracking-[0.18em] uppercase text-purple-200/80 bg-purple-950/55 border border-purple-300/20 px-3 py-1 rounded-full"
               >
-                ✦ Signature Favorit ✦
+                Sentuh & Putar 360°
               </span>
-              <span
-                class="h-[1px] w-7 sm:w-10 bg-gradient-to-l from-transparent to-purple-300/50"
-              ></span>
+              <button
+                id="butterfly-reset-btn"
+                type="button"
+                class="font-serif text-xs sm:text-sm text-amber-200/85 hover:text-amber-100 bg-[#221a17]/90 hover:bg-[#2c201b] border border-amber-300/25 px-3.5 py-1 rounded-full transition-all cursor-pointer"
+              >
+                Reset Posisi
+              </button>
             </div>
 
-            <p
-              class="font-serif italic text-base sm:text-2xl text-amber-100/85 tracking-wide"
+            <div
+              class="relative z-10 mt-4 sm:mt-5 max-w-2xl w-full text-center px-5 py-4 sm:px-9 sm:py-5 rounded-3xl bg-gradient-to-b from-[#251829]/90 via-[#1e1518]/92 to-[#181210]/95 border border-purple-300/25 shadow-[0_24px_60px_rgba(0,0,0,0.7),inset_0_1px_1px_rgba(243,232,255,0.2)] backdrop-blur-md"
             >
-              Warna dan hewan favorite mu
-            </p>
+              <div
+                class="flex items-center justify-center gap-2.5 sm:gap-3 mb-1"
+              >
+                <span
+                  class="h-[1px] w-7 sm:w-10 bg-gradient-to-r from-transparent to-purple-300/50"
+                ></span>
+                <span
+                  class="font-display text-[10px] sm:text-xs tracking-[0.26em] sm:tracking-[0.3em] uppercase text-purple-300/85"
+                >
+                  ✦ Signature Favorit ✦
+                </span>
+                <span
+                  class="h-[1px] w-7 sm:w-10 bg-gradient-to-l from-transparent to-purple-300/50"
+                ></span>
+              </div>
 
-            <h2
-              class="mt-2 font-serif text-2xl sm:text-5xl md:text-[3.2rem] font-semibold tracking-wide leading-tight bg-gradient-to-r from-purple-200 via-fuchsia-200 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_4px_20px_rgba(168,85,247,0.3)]"
+              <p
+                class="font-serif italic text-base sm:text-xl text-amber-100/85 tracking-wide"
+              >
+                Warna dan hewan favorite mu
+              </p>
+
+              <h1
+                class="mt-1 font-serif text-2xl sm:text-4xl lg:text-[2.75rem] font-semibold tracking-wide leading-tight bg-gradient-to-r from-purple-200 via-fuchsia-200 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_4px_20px_rgba(168,85,247,0.3)]"
+              >
+                Kupu-kupu dan Ungu
+              </h1>
+            </div>
+          </div>
+
+          <!-- Logo Scroll Down Simple & Klasik Bouncing (sedikit naik dari bawah layar) -->
+          <a
+            href="#potret-dia"
+            aria-label="Gulir ke potret dia"
+            class="classic-scroll-arrow relative z-10 mt-2 mb-2 lg:mb-4 p-1.5 text-amber-200/75 hover:text-amber-200 transition-colors"
+          >
+            <svg
+              viewBox="0 0 24 36"
+              class="w-4 h-7 mx-auto"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.35"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             >
-              Kupu-kupu dan Ungu
+              <path d="M12 3v28" />
+              <path d="m7.5 26.5 4.5 5 4.5-5" />
+            </svg>
+          </a>
+        </section>
+
+        <!-- ===============================================================
+             2. POTRET DIA
+        ================================================================ -->
+        <section
+          id="potret-dia"
+          data-track-node
+          data-track-index="1"
+          aria-label="Potret Dia"
+          class="diagonal-track-node relative py-14 sm:py-24"
+        >
+          <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+            <span
+              class="font-display text-[10px] sm:text-xs tracking-[0.3em] uppercase text-purple-300/85"
+            >
+              ✦ Bingkai Kesayangan ✦
+            </span>
+            <h2
+              class="mt-2 font-serif text-3xl sm:text-5xl text-amber-50 font-semibold"
+            >
+              Potret-Potret Dia
             </h2>
+            <p
+              class="mt-2 font-serif italic text-base sm:text-xl text-amber-100/70"
+            >
+              Saat kamu scroll sampai bagian ini, potret berada di tengah,
+              bagian atas berada di kiri atas, dan bagian bawah berada di kanan
+              bawah.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+            <figure
+              data-portrait-card
+              data-card-depth="1"
+              class="portrait-card-3d rounded-3xl border border-purple-300/25 bg-gradient-to-b from-[#251829]/90 via-[#1d1517]/95 to-[#181210] p-3.5 sm:p-5 shadow-[0_24px_60px_rgba(0,0,0,0.75)]"
+            >
+              <div
+                class="portrait-photo-3d aspect-[4/5] w-full rounded-2xl overflow-hidden border border-amber-200/15 bg-[#140e0d] flex items-center justify-center"
+              >
+                <img
+                  src=""
+                  alt="Potret dia 1"
+                  class="w-full h-full object-cover"
+                  onerror="
+                    this.classList.add('hidden');
+                    this.nextElementSibling.classList.remove('hidden');
+                  "
+                />
+                <div
+                  class="px-6 text-center flex flex-col items-center justify-center gap-2"
+                >
+                  <span
+                    class="font-script text-4xl sm:text-5xl text-purple-200/85"
+                    >Potret 01</span
+                  >
+                  <p
+                    class="font-serif italic text-sm sm:text-base text-amber-100/60"
+                  >
+                    Masukkan foto dia di sini
+                  </p>
+                </div>
+              </div>
+
+              <figcaption
+                class="portrait-caption-3d pt-4 sm:pt-5 px-1 sm:px-2 text-center"
+              >
+                <span
+                  class="font-display text-[10px] tracking-[0.25em] uppercase text-purple-300/80"
+                >
+                  ✦ Momen 01 ✦
+                </span>
+                <p class="mt-1 font-serif text-xl sm:text-2xl text-amber-50">
+                  Senyum yang Selalu Bikin Tenang
+                </p>
+              </figcaption>
+            </figure>
+
+            <figure
+              data-portrait-card
+              data-card-depth="1.2"
+              class="portrait-card-3d rounded-3xl border border-purple-300/20 bg-gradient-to-b from-[#251829]/85 via-[#1d1517]/95 to-[#181210] p-3.5 sm:p-5 shadow-[0_24px_60px_rgba(0,0,0,0.75)]"
+            >
+              <div
+                class="portrait-photo-3d aspect-[4/5] w-full rounded-2xl overflow-hidden border border-amber-200/15 bg-[#140e0d] flex items-center justify-center"
+              >
+                <img
+                  src=""
+                  alt="Potret dia 2"
+                  class="w-full h-full object-cover"
+                  onerror="
+                    this.classList.add('hidden');
+                    this.nextElementSibling.classList.remove('hidden');
+                  "
+                />
+                <div
+                  class="px-6 text-center flex flex-col items-center justify-center gap-2"
+                >
+                  <span
+                    class="font-script text-4xl sm:text-5xl text-purple-200/85"
+                    >Potret 02</span
+                  >
+                  <p
+                    class="font-serif italic text-sm sm:text-base text-amber-100/60"
+                  >
+                    Masukkan foto dia di sini
+                  </p>
+                </div>
+              </div>
+
+              <figcaption
+                class="portrait-caption-3d pt-4 sm:pt-5 px-1 sm:px-2 text-center"
+              >
+                <span
+                  class="font-display text-[10px] tracking-[0.25em] uppercase text-purple-300/80"
+                >
+                  ✦ Momen 02 ✦
+                </span>
+                <p class="mt-1 font-serif text-xl sm:text-2xl text-amber-50">
+                  Nuansa Ungu & Cahaya Lembut
+                </p>
+              </figcaption>
+            </figure>
           </div>
         </section>
-        <!-- Kosong: siap diisi sesuai kebutuhanmu -->
+
+        <!-- ===============================================================
+             3. KENANGAN-KENANGAN KITA
+        ================================================================ -->
+        <section
+          id="kenangan-kita"
+          data-track-node
+          data-track-index="2"
+          aria-label="Kenangan-Kenangan Kita"
+          class="diagonal-track-node relative py-14 sm:py-24"
+        >
+          <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+            <span
+              class="font-display text-[10px] sm:text-xs tracking-[0.3em] uppercase text-amber-300/80"
+            >
+              ✦ Arsip Hati ✦
+            </span>
+            <h2
+              class="mt-2 font-serif text-3xl sm:text-5xl text-amber-50 font-semibold"
+            >
+              Kenangan yang Tersimpan Rapi
+            </h2>
+            <p
+              class="mt-2 font-serif italic text-base sm:text-xl text-amber-100/70"
+            >
+              Klik kartu kenangan untuk membuka ceritanya lebih lebar.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            <article
+              role="button"
+              tabindex="0"
+              aria-expanded="false"
+              class="memory-entry-card cursor-pointer rounded-3xl border border-amber-300/15 bg-[#221a17]/80 backdrop-blur-md p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
+            >
+              <div class="flex items-center justify-between gap-3">
+                <span
+                  class="font-display text-[10px] tracking-[0.25em] uppercase text-purple-300/85"
+                >
+                  ✦ Kenangan #01 ✦
+                </span>
+                <span
+                  data-expand-label
+                  class="font-serif italic text-xs sm:text-sm text-amber-200/75"
+                >
+                  Klik untuk membuka
+                </span>
+              </div>
+
+              <h3
+                class="mt-3 font-serif text-2xl sm:text-3xl text-amber-50 font-semibold"
+              >
+                Momen Sederhana yang Selalu Diingat
+              </h3>
+
+              <div
+                data-memory-detail
+                class="memory-scroll-area mt-3 font-serif text-base sm:text-lg text-amber-100/80 leading-relaxed max-h-36 overflow-y-auto pr-1"
+              >
+                <p>
+                  Tulis cerita kenangan favoritmu bersamanya di sini — mulai
+                  dari obrolan ringan, tawa yang tak terduga, sampai momen kecil
+                  yang selalu bikin hari terasa lebih hangat.
+                </p>
+              </div>
+            </article>
+
+            <article
+              role="button"
+              tabindex="0"
+              aria-expanded="false"
+              class="memory-entry-card cursor-pointer rounded-3xl border border-amber-300/15 bg-[#221a17]/80 backdrop-blur-md p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
+            >
+              <div class="flex items-center justify-between gap-3">
+                <span
+                  class="font-display text-[10px] tracking-[0.25em] uppercase text-purple-300/85"
+                >
+                  ✦ Kenangan #02 ✦
+                </span>
+                <span
+                  data-expand-label
+                  class="font-serif italic text-xs sm:text-sm text-amber-200/75"
+                >
+                  Klik untuk membuka
+                </span>
+              </div>
+
+              <h3
+                class="mt-3 font-serif text-2xl sm:text-3xl text-amber-50 font-semibold"
+              >
+                Warna Ungu & Kupu-Kupu Kesayangan
+              </h3>
+
+              <div
+                data-memory-detail
+                class="memory-scroll-area mt-3 font-serif text-base sm:text-lg text-amber-100/80 leading-relaxed max-h-36 overflow-y-auto pr-1"
+              >
+                <p>
+                  Simpan catatan tentang hal-hal yang paling dia sukai, cerita
+                  kecil di balik warna ungu, dan alasan kenapa hal-hal tersebut
+                  selalu terasa istimewa.
+                </p>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <!-- ===============================================================
+             4. SECTION KHUSUS BUTTON 3D ("BUKA PESAN") + TIRAI + ANIMASI SCROLL
+        ================================================================ -->
+        <section
+          id="section-button-3d"
+          data-track-node
+          data-track-index="3"
+          aria-label="Section Tombol 3D Buka Pesan"
+          class="diagonal-track-node scroll-entrance-section mt-8 sm:mt-14"
+        >
+          <div
+            class="exclusive-curtain-shell rounded-[2rem] border border-purple-300/30 bg-gradient-to-b from-[#2a1933]/92 via-[#1e141c]/95 to-[#171110]/98 shadow-[0_32px_80px_rgba(0,0,0,0.82),inset_0_1px_1px_rgba(243,232,255,0.22)] px-6 py-14 sm:px-12 sm:py-20 text-center"
+          >
+            <div aria-hidden="true" class="exclusive-curtain-left"></div>
+            <div aria-hidden="true" class="exclusive-curtain-right"></div>
+
+            <div
+              aria-hidden="true"
+              class="pointer-events-none absolute inset-4 rounded-[1.5rem] border border-amber-300/15"
+            ></div>
+
+            <div class="relative z-10 max-w-2xl mx-auto">
+              <div class="flex items-center justify-center gap-3 mb-3">
+                <span
+                  class="h-[1px] w-10 bg-gradient-to-r from-transparent to-purple-300/60"
+                ></span>
+                <span
+                  class="font-display text-[10px] sm:text-xs tracking-[0.32em] uppercase text-purple-200/90"
+                >
+                  ✦ Kejutan Spesial ✦
+                </span>
+                <span
+                  class="h-[1px] w-10 bg-gradient-to-l from-transparent to-amber-300/60"
+                ></span>
+              </div>
+
+              <h2
+                class="font-serif text-3xl sm:text-5xl text-amber-50 font-semibold leading-tight"
+              >
+                Pesan Teristimewa Menantimu
+              </h2>
+
+              <p
+                class="mt-3 font-serif italic text-base sm:text-xl text-amber-100/75"
+              >
+                Sentuh dan tekan tombol 3D di bawah ini untuk membuka surat
+                ulang tahun klasik untuk Quieska Noor Nisrina.
+              </p>
+
+              <div
+                class="mt-10 sm:mt-12 relative flex items-center justify-center py-4"
+              >
+                <div aria-hidden="true" class="btn-3d-aura"></div>
+
+                <button
+                  id="open-birthday-popup-btn"
+                  type="button"
+                  data-button-parallax
+                  aria-haspopup="dialog"
+                  aria-controls="birthday-grand-popup"
+                  class="btn-3d-stage relative z-10 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-200"
+                >
+                  <span class="btn-3d-bevel">
+                    <span
+                      aria-hidden="true"
+                      class="text-amber-200 text-base sm:text-xl"
+                      >✦</span
+                    >
+                    <span
+                      class="font-serif text-xl sm:text-3xl font-semibold tracking-wider text-amber-50 drop-shadow-[0_2px_8px_rgba(0,0,0,0.65)]"
+                    >
+                      Buka Pesan
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      class="text-purple-200 text-base sm:text-xl"
+                      >✧</span
+                    >
+                  </span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
 
-      <!-- Footer Klasik -->
+      <!-- Footer Klasik — Ikut Lintasan Diagonal & Transisi Scroll -->
       <footer
-        class="border-t border-amber-200/10 py-6 sm:py-8 px-4 text-center font-serif text-xs sm:text-sm text-amber-100/50"
+        data-track-node
+        data-track-index="4"
+        class="diagonal-track-node scroll-entrance-section border-t border-amber-200/10 py-8 sm:py-10 px-4 text-center font-serif text-xs sm:text-sm text-amber-100/60"
       >
         <p>Dirangkai dengan penuh kasih & keajaiban • 2026</p>
       </footer>
+    </div>
+
+    <!-- ===================================================================
+         POPUP MINIMALIS PREMIUM:
+         "Selamat ulang tahun ke-" + ANGKA 0..17 NGEPOP + DOA + BUNGA + LAGU AUTO-LOOP
+         Tombol tutup berada di bawah dan di luar kartu popup
+    ==================================================================== -->
+    <div
+      id="birthday-grand-popup"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="birthday-popup-title"
+      aria-hidden="true"
+      class="birthday-grand-modal"
+    >
+      <!-- Layer Bunga Bertebaran di Seluruh Layar -->
+      <div
+        id="birthday-flowers-layer"
+        class="birthday-flowers-fullscreen"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Kartu Minimalis Premium -->
+      <div class="birthday-minimal-premium-card">
+        <span class="text-amber-300/80 text-xs tracking-[0.35em] mb-2">
+          ✦
+        </span>
+
+        <p
+          id="birthday-popup-title"
+          class="font-serif italic text-xl sm:text-3xl text-amber-100/90 tracking-wide"
+        >
+          Selamat ulang tahun ke-
+        </p>
+
+        <!-- Angka 0 -> 1 -> 2 ... -> 17 Lalu Ngepop -->
+        <div
+          class="my-3 sm:my-4 flex items-center justify-center min-h-[92px] sm:min-h-[150px]"
+        >
+          <span id="birthday-age-counter" class="age-number-giant">0</span>
+        </div>
+
+        <p class="font-script text-3xl sm:text-5xl text-purple-200/95">
+          Quieska Noor Nisrina
+        </p>
+
+        <!-- Doa di Bawah Angka -->
+        <div
+          id="birthday-prayer-block"
+          class="prayer-block-reveal mt-5 sm:mt-6 max-w-xl border-t border-amber-200/15 pt-5"
+        >
+          <p
+            class="font-serif italic text-base sm:text-xl text-amber-100/85 leading-relaxed"
+          >
+            "Semoga di usia ketujuh belas ini langkahmu selalu ditemani
+            ketenangan, kesehatan, dan kebahagiaan yang tulus, Quieska Noor
+            Nisrina."
+          </p>
+        </div>
+      </div>
+
+      <!-- Tombol Tutup di Bawah & di Luar Popup -->
+      <button
+        id="close-birthday-popup-btn"
+        type="button"
+        aria-label="Tutup popup pesan ulang tahun"
+        class="outside-popup-close-btn"
+      >
+        <span>✕</span>
+        <span>Tutup Pesan</span>
+      </button>
     </div>
 
     <script>
