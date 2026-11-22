@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Favorite — Chronicles of Us</title>
+    <!-- Sesuaikan path output.css dengan lokasi file CSS hasil build Tailwind v4 -->
+    <link rel="stylesheet" href="../../src/css/output.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Pinyon+Script&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-[#181210] text-[#f5efe6] font-sans antialiased overflow-x-hidden selection:bg-amber-800/30 selection:text-amber-100"
+  >
+    <div
+      id="main-website"
+      class="section-blend-canvas min-h-dvh text-[#f5efe6] flex flex-col relative"
+    >
+      <!-- Navbar Paten (z-40 di atas tirai z-20) -->
+      <header
+        class="fixed top-0 inset-x-0 z-40 bg-[#181210]/90 backdrop-blur-md border-b border-amber-200/10"
+      >
+        <div
+          class="max-w-6xl mx-auto px-4 sm:px-8 h-16 md:h-20 flex items-center justify-between gap-3"
+        >
+          <a
+            href="../../index.html"
+            class="font-display text-base sm:text-xl tracking-wider text-amber-200 flex items-center gap-2 sm:gap-2.5 truncate"
+          >
+            <span class="text-red-500 text-xs sm:text-sm shrink-0">✦</span>
+            <span class="truncate">Chronicles of Us</span>
+          </a>
+
+          <nav
+            class="hidden md:flex items-center gap-7 font-serif text-lg text-amber-100/75"
+          >
+            <a
+              href="../../index.html#babak-kisah"
+              class="hover:text-amber-300 transition-colors"
+              >Babak Kisah</a
+            >
+            <a
+              href="../../index.html#lagu-favorit"
+              class="hover:text-amber-300 transition-colors"
+              >Lagu Favorit</a
+            >
+            <a
+              href="../../index.html#janji-abadi"
+              class="hover:text-amber-300 transition-colors"
+              >Janji & Harapan</a
+            >
+            <a
+              href="../../index.html#penutup"
+              class="hover:text-amber-300 transition-colors"
+              >Catatan Akhir</a
+            >
+          </nav>
+
+          <a
+            href="../../index.html"
+            class="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-amber-900/25 hover:bg-amber-800/40 text-amber-200 border border-amber-400/25 font-serif text-xs sm:text-base transition-all active:scale-95 cursor-pointer shrink-0"
+          >
+            <span>←</span>
+            <span>Kembali</span>
+          </a>
+        </div>
+      </header>
+
+      <!-- Tirai Terbuka di Belakang Navbar (z-20, mulai dari bawah tinggi navbar) -->
+      <div
+        id="entry-curtain-overlay"
+        aria-hidden="true"
+        class="pointer-events-none fixed inset-x-0 bottom-0 top-16 md:top-20 z-20 overflow-hidden"
+      >
+        <div
+          id="entry-curtain-backdrop"
+          class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(62,22,25,0.92)_0%,rgba(24,18,16,0.98)_100%)] opacity-100 transition-opacity duration-[1600ms] ease-out"
+        ></div>
+
+        <div
+          class="entry-curtain-left absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#190a0b] via-[#2c1012] to-[#3e1619] border-r border-amber-300/25 shadow-[16px_0_48px_rgba(0,0,0,0.8)]"
+        ></div>
+        <div
+          class="entry-curtain-right absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-[#190a0b] via-[#2c1012] to-[#3e1619] border-l border-amber-300/25 shadow-[-16px_0_48px_rgba(0,0,0,0.8)]"
+        ></div>
+
+        <div
+          id="entry-curtain-title"
+          class="relative z-10 h-full flex flex-col items-center justify-center px-6 text-center transition-all duration-700 ease-out"
+        >
+          <span
+            class="font-display text-[11px] sm:text-xs tracking-[0.3em] uppercase text-amber-300/85"
+          >
+            ✦ Chronicles of Us ✦
+          </span>
+          <p class="mt-2 font-script text-4xl sm:text-6xl text-amber-100">
+            Tirai Terbuka...
+          </p>
+        </div>
+      </div>
+
+      <!-- Area Konten Utama (Belum Ada Isinya, diberi padding-top agar tidak tertutup navbar fixed) -->
+      <main
+        class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-8 pt-24 md:pt-28 pb-16 sm:pb-24"
+      >
+        <!-- ===============================================================
+     ELEMEN KUPU-KUPU UNGU 3D INTERAKTIF (ROTASI 360 DERAJAT)
+================================================================ -->
+        <!-- ===============================================================
+     ELEMEN KUPU-KUPU UNGU 3D INTERAKTIF (ROTASI 360 DERAJAT)
+================================================================ -->
+        <section
+          id="kupu-kupu-ungu-3d"
+          aria-label="Kupu-Kupu Ungu 3D Interaktif"
+          class="relative py-14 sm:py-24 px-4 sm:px-8 flex flex-col items-center justify-center overflow-x-clip"
+        >
+          <!-- Aura cahaya ungu & emas lembut (tanpa blur-2xl agar tidak ada tepi kotak terpotong di mobile) -->
+          <div
+            aria-hidden="true"
+            class="butterfly-violet-aura pointer-events-none absolute top-1/2 left-1/2 w-[250px] h-[250px] sm:w-[520px] sm:h-[520px] rounded-full bg-[radial-gradient(circle_at_center,rgba(192,132,252,0.22)_0%,rgba(126,34,206,0.12)_34%,rgba(251,191,36,0.04)_52%,rgba(24,18,16,0)_68%)]"
+          ></div>
+
+          <!-- Cincin orbit tipis beraksen ungu & emas -->
+          <div
+            aria-hidden="true"
+            class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[220px] sm:w-[390px] sm:h-[390px] rounded-full border border-purple-300/15 shadow-[inset_0_0_32px_rgba(192,132,252,0.05)]"
+          ></div>
+
+          <!-- Arena Sentuh & Rotasi 360 Derajat -->
+          <div
+            id="butterfly-3d-stage"
+            role="img"
+            tabindex="0"
+            aria-label="Kupu-kupu ungu 3 dimensi, sentuh dan geser untuk memutar 360 derajat"
+            class="butterfly-3d-stage relative z-10 w-full max-w-md h-[220px] sm:h-[310px] flex items-center justify-center cursor-grab active:cursor-grabbing rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-300/50"
+          >
+            <div id="butterfly-3d-pivot" class="butterfly-3d-pivot">
+              <!-- Sayap Kiri 3D -->
+              <div class="butterfly-wing-left">
+                <svg
+                  viewBox="0 0 180 220"
+                  class="w-full h-full overflow-visible drop-shadow-[0_12px_24px_rgba(88,28,135,0.5)]"
+                >
+                  <defs>
+                    <linearGradient
+                      id="wingLeftGrad"
+                      x1="100%"
+                      y1="0%"
+                      x2="0%"
+                      y2="100%"
+                    >
+                      <stop offset="0%" stop-color="#e9d5ff" />
+                      <stop offset="28%" stop-color="#a855f7" />
+                      <stop offset="68%" stop-color="#6b21a8" />
+                      <stop offset="100%" stop-color="#2e1065" />
+                    </linearGradient>
+                    <linearGradient
+                      id="goldVeinGrad"
+                      x1="0%"
+                      y1="0%"
+                      x2="100%"
+                      y2="100%"
+                    >
+                      <stop
+                        offset="0%"
+                        stop-color="#fef08a"
+                        stop-opacity="0.9"
+                      />
+                      <stop
+                        offset="60%"
+                        stop-color="#f59e0b"
+                        stop-opacity="0.55"
+                      />
+                      <stop
+                        offset="100%"
+                        stop-color="#fde68a"
+                        stop-opacity="0.15"
+                      />
+                    </linearGradient>
+                  </defs>
+
+                  <path
+                    d="M178 96 C152 24, 66 -2, 16 26 C-8 40, 4 86, 48 106 C86 122, 146 114, 178 96 Z"
+                    fill="url(#wingLeftGrad)"
+                    stroke="url(#goldVeinGrad)"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M178 106 C142 112, 62 114, 34 152 C14 178, 42 212, 86 202 C128 192, 162 152, 178 106 Z"
+                    fill="url(#wingLeftGrad)"
+                    stroke="url(#goldVeinGrad)"
+                    stroke-width="1.8"
+                  />
+
+                  <circle
+                    cx="56"
+                    cy="54"
+                    r="11"
+                    fill="#f3e8ff"
+                    opacity="0.55"
+                  />
+                  <circle cx="56" cy="54" r="5" fill="#fde68a" opacity="0.85" />
+                  <circle cx="32" cy="74" r="6" fill="#e9d5ff" opacity="0.65" />
+                  <circle
+                    cx="72"
+                    cy="166"
+                    r="9"
+                    fill="#f3e8ff"
+                    opacity="0.45"
+                  />
+                  <circle cx="72" cy="166" r="4" fill="#fde68a" opacity="0.8" />
+
+                  <path
+                    d="M174 98 C132 76, 86 58, 34 44 M174 101 C126 92, 82 86, 30 84 M174 106 C132 128, 92 150, 54 178"
+                    fill="none"
+                    stroke="url(#goldVeinGrad)"
+                    stroke-width="1.2"
+                  />
+                </svg>
+              </div>
+
+              <!-- Sayap Kanan 3D -->
+              <div class="butterfly-wing-right">
+                <svg
+                  viewBox="0 0 180 220"
+                  class="w-full h-full overflow-visible drop-shadow-[0_12px_24px_rgba(88,28,135,0.5)]"
+                  style="transform: scaleX(-1)"
+                >
+                  <defs>
+                    <linearGradient
+                      id="wingRightGrad"
+                      x1="100%"
+                      y1="0%"
+                      x2="0%"
+                      y2="100%"
+                    >
+                      <stop offset="0%" stop-color="#e9d5ff" />
+                      <stop offset="28%" stop-color="#a855f7" />
+                      <stop offset="68%" stop-color="#6b21a8" />
+                      <stop offset="100%" stop-color="#2e1065" />
+                    </linearGradient>
+                  </defs>
+
+                  <path
+                    d="M178 96 C152 24, 66 -2, 16 26 C-8 40, 4 86, 48 106 C86 122, 146 114, 178 96 Z"
+                    fill="url(#wingRightGrad)"
+                    stroke="url(#goldVeinGrad)"
+                    stroke-width="2"
+                  />
+                  <path
+                    d="M178 106 C142 112, 62 114, 34 152 C14 178, 42 212, 86 202 C128 192, 162 152, 178 106 Z"
+                    fill="url(#wingRightGrad)"
+                    stroke="url(#goldVeinGrad)"
+                    stroke-width="1.8"
+                  />
+
+                  <circle
+                    cx="56"
+                    cy="54"
+                    r="11"
+                    fill="#f3e8ff"
+                    opacity="0.55"
+                  />
+                  <circle cx="56" cy="54" r="5" fill="#fde68a" opacity="0.85" />
+                  <circle cx="32" cy="74" r="6" fill="#e9d5ff" opacity="0.65" />
+                  <circle
+                    cx="72"
+                    cy="166"
+                    r="9"
+                    fill="#f3e8ff"
+                    opacity="0.45"
+                  />
+                  <circle cx="72" cy="166" r="4" fill="#fde68a" opacity="0.8" />
+
+                  <path
+                    d="M174 98 C132 76, 86 58, 34 44 M174 101 C126 92, 82 86, 30 84 M174 106 C132 128, 92 150, 54 178"
+                    fill="none"
+                    stroke="url(#goldVeinGrad)"
+                    stroke-width="1.2"
+                  />
+                </svg>
+              </div>
+
+              <!-- Tubuh & Antena Emas-Ungu 3D -->
+              <div class="butterfly-body-3d">
+                <svg
+                  viewBox="0 0 60 150"
+                  class="w-10 sm:w-14 h-24 sm:h-36 overflow-visible"
+                >
+                  <path
+                    d="M27 32 C18 12, 8 6, 4 10"
+                    fill="none"
+                    stroke="#fbbf24"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <circle cx="4" cy="10" r="3" fill="#fde68a" />
+
+                  <path
+                    d="M33 32 C42 12, 52 6, 56 10"
+                    fill="none"
+                    stroke="#fbbf24"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <circle cx="56" cy="10" r="3" fill="#fde68a" />
+
+                  <ellipse
+                    cx="30"
+                    cy="36"
+                    rx="6.5"
+                    ry="7.5"
+                    fill="#3b0764"
+                    stroke="#f59e0b"
+                    stroke-width="1.2"
+                  />
+                  <ellipse
+                    cx="30"
+                    cy="56"
+                    rx="8.5"
+                    ry="15"
+                    fill="#4c1d95"
+                    stroke="#fbbf24"
+                    stroke-width="1.3"
+                  />
+
+                  <ellipse cx="30" cy="82" rx="6.5" ry="10" fill="#3b0764" />
+                  <ellipse cx="30" cy="96" rx="5.5" ry="8" fill="#581c87" />
+                  <ellipse cx="30" cy="109" rx="4.2" ry="7" fill="#3b0764" />
+                  <ellipse
+                    cx="30"
+                    cy="120"
+                    rx="2.6"
+                    ry="5"
+                    fill="#fbbf24"
+                    opacity="0.85"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Petunjuk Sentuh / Rotasi 360° -->
+          <div
+            class="relative z-10 mt-3 flex flex-wrap items-center justify-center gap-2.5"
+          >
+            <span
+              id="butterfly-angle-readout"
+              class="font-sans text-[11px] tracking-[0.18em] uppercase text-purple-200/80 bg-purple-950/55 border border-purple-300/20 px-3 py-1 rounded-full"
+            >
+              Sentuh & Putar 360° • 0°
+            </span>
+            <button
+              id="butterfly-reset-btn"
+              type="button"
+              class="font-serif text-xs sm:text-sm text-amber-200/85 hover:text-amber-100 bg-[#221a17]/90 hover:bg-[#2c201b] border border-amber-300/25 px-3.5 py-1 rounded-full transition-all cursor-pointer"
+            >
+              Reset Posisi
+            </button>
+          </div>
+
+          <!-- Plakat Mewah Tulisan di Bawah Kupu-Kupu -->
+          <div
+            class="relative z-10 mt-7 sm:mt-10 max-w-2xl w-full text-center px-5 py-6 sm:px-10 sm:py-9 rounded-3xl bg-gradient-to-b from-[#251829]/90 via-[#1e1518]/92 to-[#181210]/95 border border-purple-300/25 shadow-[0_24px_60px_rgba(0,0,0,0.7),inset_0_1px_1px_rgba(243,232,255,0.2)] backdrop-blur-md"
+          >
+            <div class="flex items-center justify-center gap-2.5 sm:gap-3 mb-2">
+              <span
+                class="h-[1px] w-7 sm:w-10 bg-gradient-to-r from-transparent to-purple-300/50"
+              ></span>
+              <span
+                class="font-display text-[10px] sm:text-xs tracking-[0.26em] sm:tracking-[0.3em] uppercase text-purple-300/85"
+              >
+                ✦ Signature Favorit ✦
+              </span>
+              <span
+                class="h-[1px] w-7 sm:w-10 bg-gradient-to-l from-transparent to-purple-300/50"
+              ></span>
+            </div>
+
+            <p
+              class="font-serif italic text-base sm:text-2xl text-amber-100/85 tracking-wide"
+            >
+              Warna dan hewan favorite mu
+            </p>
+
+            <h2
+              class="mt-2 font-serif text-2xl sm:text-5xl md:text-[3.2rem] font-semibold tracking-wide leading-tight bg-gradient-to-r from-purple-200 via-fuchsia-200 to-amber-200 bg-clip-text text-transparent drop-shadow-[0_4px_20px_rgba(168,85,247,0.3)]"
+            >
+              Kupu-kupu dan Ungu
+            </h2>
+          </div>
+        </section>
+        <!-- Kosong: siap diisi sesuai kebutuhanmu -->
+      </main>
+
+      <!-- Footer Klasik -->
+      <footer
+        class="border-t border-amber-200/10 py-6 sm:py-8 px-4 text-center font-serif text-xs sm:text-sm text-amber-100/50"
+      >
+        <p>Dirangkai dengan penuh kasih & keajaiban • 2026</p>
+      </footer>
+    </div>
+
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const overlay = document.getElementById("entry-curtain-overlay");
+        const backdrop = document.getElementById("entry-curtain-backdrop");
+        const title = document.getElementById("entry-curtain-title");
+        if (!overlay) return;
+
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (title) {
+              title.style.opacity = "0";
+              title.style.transform = "scale(0.95) translateY(-8px)";
+            }
+            if (backdrop) {
+              backdrop.style.opacity = "0";
+            }
+            overlay.classList.add("is-open");
+          });
+        });
+
+        setTimeout(() => {
+          overlay.classList.add("hidden");
+        }, 2150);
+      });
+    </script>
+    <script src="../../src/script/fa.js"></script>
+  </body>
+</html>
