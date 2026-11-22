@@ -1,0 +1,1463 @@
+<!doctype html>
+<html lang="id" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Surat Perkamen & Kisah Abadi — Pengalaman Interaktif</title>
+    <!-- Tailwind CSS v4 Output -->
+    <link rel="stylesheet" href="./src/css/output.css" />
+    <!-- Google Fonts: Cinzel Decorative, Cormorant Garamond, & Pinyon Script untuk nuansa Hogwarts & Romantis -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Pinyon+Script&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  </head>
+  <body
+    class="bg-[#181210] text-stone-800 font-sans antialiased overflow-x-hidden overflow-hidden selection:bg-amber-800/30 selection:text-stone-950"
+  >
+    <!-- Layer Khusus Partikel Interaktif (Selalu di Atas Tanpa Menghalangi Klik) -->
+    <div
+      id="romantic-particles-layer"
+      class="pointer-events-none fixed inset-0 z-[9999] overflow-hidden"
+      aria-hidden="true"
+    ></div>
+
+    <!-- =====================================================================
+         OVERLAY INTERAKTIF: AMPLOP VINTAGE & MODAL SURAT DI TENGAH LAYAR
+    ====================================================================== -->
+    <div
+      id="letter-overlay"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-[#120d0b]/92 backdrop-blur-md transition-opacity duration-1000 overflow-hidden px-3 sm:px-6"
+    >
+      <!-- Partikel Cahaya Emas Melayang di Latar Belakang -->
+      <div class="pointer-events-none absolute inset-0 overflow-hidden">
+        <span
+          class="sparkle absolute top-[22%] left-[25%] w-1.5 h-1.5 rounded-full bg-amber-300 shadow-[0_0_10px_#fcd34d]"
+          style="--dur: 3.8s; --delay: 0.2s"
+        ></span>
+        <span
+          class="sparkle absolute top-[30%] right-[28%] w-2 h-2 rounded-full bg-amber-200 shadow-[0_0_12px_#fde68a]"
+          style="--dur: 4.5s; --delay: 1.1s"
+        ></span>
+        <span
+          class="sparkle absolute bottom-[28%] left-[32%] w-1.5 h-1.5 rounded-full bg-amber-400 shadow-[0_0_10px_#fbbf24]"
+          style="--dur: 4.2s; --delay: 0.7s"
+        ></span>
+        <span
+          class="sparkle absolute bottom-[25%] right-[24%] w-1 h-1 rounded-full bg-amber-200 shadow-[0_0_8px_#fef3c7]"
+          style="--dur: 3.5s; --delay: 1.8s"
+        ></span>
+        <span
+          class="sparkle absolute top-[18%] left-[52%] w-1.5 h-1.5 rounded-full bg-amber-300 shadow-[0_0_10px_#fcd34d]"
+          style="--dur: 5s; --delay: 0.5s"
+        ></span>
+      </div>
+
+      <!-- TAHAP 1: STAGE AMPLOP VINTAGE (RATA TENGAH & RESPONSIF DI SEMUA LAYAR) -->
+      <div
+        id="envelope-stage"
+        class="relative w-full max-w-md flex flex-col items-center justify-center p-2 sm:p-4 transition-all duration-700"
+      >
+        <!-- Petunjuk Magis di Atas Amplop -->
+        <div
+          id="envelope-hint"
+          class="mb-5 sm:mb-7 text-center px-2 transition-all duration-500"
+        >
+          <p
+            class="font-display text-[11px] sm:text-sm tracking-[0.24em] sm:tracking-[0.28em] uppercase text-amber-300/85 mb-1.5"
+          >
+            ✦ Sepucuk Surat Untukmu ✦
+          </p>
+          <p
+            class="font-serif italic text-lg sm:text-2xl text-amber-100/90 leading-snug"
+          >
+            Sentuh segel lilin untuk membuka surat di dalamnya
+          </p>
+        </div>
+
+        <!-- Container 3D Amplop Vintage (Fluid di layar sangat kecil & proporsional di tablet/desktop) -->
+        <div
+          id="envelope-wrapper"
+          class="relative w-[290px] max-w-[90vw] h-[190px] sm:w-[360px] sm:h-[235px] md:w-[400px] md:h-[260px] perspective-1200 cursor-pointer animate-levitate group select-none touch-manipulation"
+        >
+          <!-- Cahaya Aura Emas di Bawah Amplop -->
+          <div
+            class="absolute -bottom-8 sm:-bottom-9 left-1/2 -translate-x-1/2 w-4/5 h-5 sm:h-6 bg-amber-500/20 blur-xl rounded-full transition-all duration-700 group-hover:bg-amber-400/35"
+          ></div>
+
+          <!-- Badan Belakang Amplop Perkamen -->
+          <div
+            class="relative w-full h-full parchment-envelope rounded-lg shadow-[0_25px_50px_rgba(0,0,0,0.75)] border border-amber-900/40"
+          >
+            <!-- Kertas Surat Mini di Dalam Amplop (Akan meluncur keluar saat dibuka) -->
+            <div
+              id="peek-letter"
+              class="absolute left-1/2 -translate-x-1/2 bottom-3 w-[88%] h-[82%] parchment-paper rounded-md border border-amber-900/30 z-10 flex flex-col items-center pt-4 sm:pt-5 px-3 sm:px-4 opacity-0 transition-all duration-700 ease-out"
+            >
+              <span class="font-script text-xl sm:text-3xl text-amber-950/80"
+                >Untukmu, Sejarawan...</span
+              >
+              <div
+                class="w-14 sm:w-16 h-[1px] bg-amber-900/30 my-1.5 sm:my-2"
+              ></div>
+              <p
+                class="font-serif italic text-[11px] sm:text-sm text-stone-700 text-center line-clamp-3"
+              >
+                Di bawah langit malam yang bertabur bintang, kutuliskan sepucuk
+                surat yang melintasi batas ruang dan waktu...
+              </p>
+            </div>
+
+            <!-- Kantong Lipatan Depan Amplop (Kiri, Kanan, Bawah) -->
+            <div class="pointer-events-none">
+              <!-- Lipatan Kiri -->
+              <div
+                class="pocket-left absolute inset-0 bg-[#d5bc94] rounded-lg z-20 border-l border-amber-950/20"
+              ></div>
+              <!-- Lipatan Kanan -->
+              <div
+                class="pocket-right absolute inset-0 bg-[#cfb48a] rounded-lg z-20 border-r border-amber-950/20"
+              ></div>
+              <!-- Lipatan Bawah -->
+              <div
+                class="pocket-bottom absolute inset-0 bg-[#dfc8a2] rounded-lg z-30 shadow-[0_-4px_12px_rgba(62,39,35,0.18)]"
+              ></div>
+            </div>
+
+            <!-- Alamat Kaligrafi Klasik di Sudut Amplop -->
+            <div
+              class="absolute bottom-3 left-3.5 sm:bottom-3.5 sm:left-4 z-35 pointer-events-none opacity-80"
+            >
+              <p
+                class="font-script text-base sm:text-xl text-stone-800 leading-none"
+              >
+                I Wrote a Letter for You
+              </p>
+              <p
+                class="font-serif italic text-[10px] sm:text-xs text-stone-700 mt-0.5"
+              >
+                F:C T:Q
+              </p>
+            </div>
+
+            <!-- Flap / Tutup Atas Amplop (Berputar 3D ke belakang) -->
+            <div
+              id="envelope-flap"
+              class="flap-top absolute inset-0 bg-[#c8ab7e] rounded-t-lg z-40 shadow-md border-t border-amber-900/30"
+            ></div>
+
+            <!-- Segel Lilin Merah Marun (#7f1d1d) dengan Emboss Emas -->
+            <div
+              id="wax-seal"
+              class="wax-seal-3d absolute top-[54%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-50 w-13 h-13 sm:w-16 sm:h-16 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110"
+            >
+              <div
+                class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-amber-300/40 flex items-center justify-center shadow-inner"
+              >
+                <span
+                  class="font-display font-bold text-amber-200/95 text-base sm:text-xl drop-shadow"
+                  >C</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Petunjuk Tambahan Bawah untuk Layar Sentuh & Desktop -->
+        <p
+          class="mt-6 sm:mt-8 font-serif italic text-xs sm:text-sm text-amber-200/60 text-center"
+        >
+          (Ketuk di mana saja untuk memancarkan kilau & kelopak mawar)
+        </p>
+      </div>
+
+      <!-- TAHAP 2: MODAL KERTAS SURAT PERKAMEN (100% RATA TENGAH VIEWPORT, RESPONSIF & TIDAK TERPOTONG) -->
+      <div
+        id="letter-modal-container"
+        class="fixed inset-0 z-50 hidden items-center justify-center p-3 sm:p-6 pointer-events-none"
+      >
+        <div
+          id="letter-card"
+          class="parchment-paper pointer-events-auto relative w-full max-w-2xl max-h-[84dvh] rounded-xl border-2 border-amber-900/45 flex flex-col overflow-hidden opacity-0 scale-90 translate-y-6 transition-all duration-700 ease-out"
+        >
+          <!-- Bingkai Garis Ganda Klasik di Bagian Dalam -->
+          <div
+            class="pointer-events-none absolute inset-2 sm:inset-2.5 border border-amber-900/25 rounded-lg z-20"
+          ></div>
+
+          <!-- Ornamen Sudut Emas/Cokelat Tua -->
+          <span
+            class="pointer-events-none absolute top-3 left-3 sm:top-3.5 sm:left-3.5 text-amber-900/50 text-xs z-20"
+            >❧</span
+          >
+          <span
+            class="pointer-events-none absolute top-3 right-3 sm:top-3.5 sm:right-3.5 text-amber-900/50 text-xs z-20 scale-x-[-1]"
+            >❧</span
+          >
+          <span
+            class="pointer-events-none absolute bottom-3 left-3 sm:bottom-3.5 sm:left-3.5 text-amber-900/50 text-xs z-20 scale-y-[-1]"
+            >❧</span
+          >
+          <span
+            class="pointer-events-none absolute bottom-3 right-3 sm:bottom-3.5 sm:right-3.5 text-amber-900/50 text-xs z-20 scale-[-1]"
+            >❧</span
+          >
+
+          <!-- Header Surat Klasik -->
+          <div
+            class="relative z-10 px-5 sm:px-10 md:px-12 pt-6 sm:pt-8 pb-3.5 sm:pb-4 border-b border-amber-900/20 flex items-center justify-between gap-3 sm:gap-4 shrink-0"
+          >
+            <div>
+              <p
+                class="font-display text-[10px] sm:text-xs tracking-[0.2em] sm:tracking-[0.22em] uppercase text-red-900/80 font-bold"
+              >
+                Dari sepi yang lama singgah
+              </p>
+              <h2
+                class="font-script text-2xl sm:text-3xl md:text-4xl text-stone-900 mt-0.5 leading-tight"
+              >
+                Dear Quieska Noor Nisrina
+              </h2>
+            </div>
+            <!-- Stempel Lilin Mini di Pojok Kanan Atas Surat -->
+            <div
+              class="flex wax-seal-3d w-9 h-9 sm:w-11 sm:h-11 rounded-full items-center justify-center shrink-0 rotate-12"
+            >
+              <span
+                class="font-display text-[11px] sm:text-xs font-bold text-amber-200"
+                >✦</span
+              >
+            </div>
+          </div>
+
+          <!-- Konten Surat Romantis & Puitis (Area yang Di-Scroll) -->
+          <div
+            id="letter-scroll-container"
+            class="vintage-scroll relative z-10 flex-1 overflow-y-auto px-5 sm:px-10 md:px-12 py-5 sm:py-6 space-y-4 sm:space-y-5 font-serif text-base sm:text-lg md:text-[20px] leading-[1.75] sm:leading-[1.8] text-stone-800"
+          >
+            <p class="italic text-stone-600 text-sm sm:text-base md:text-lg">
+              Tertulis pada malam ke-21 di bulan November, saat Angin kamarku
+              berbisik lembut namamu...
+            </p>
+
+            <p>
+              <span
+                class="float-left font-display text-3xl sm:text-4xl md:text-5xl text-red-900 mr-2.5 sm:mr-3 mt-1 leading-none"
+                >H</span
+              >ai Quieska, dari pertama aku kenal kamu, aku lebih semangat ke
+              sekolah loh... Rasanya lebih hidup ya 😊.
+            </p>
+
+            <p>
+              Aku jadi lebih seneng hari-harinya, lebih semangat belajarnya,
+              lebih aktif juga di ROHIS. Kamu juga udah buat aku peduli sama
+              beberapa hal yang aku anggap biasa aja sebelumnya... Kayak seni,
+              mainan-mainan, sampai lagu-lagu yang asing kudengar. Aku main
+              piano jadi lebih terasa maknanya...
+            </p>
+
+            <blockquote
+              class="my-5 sm:my-6 px-4 sm:px-5 py-3.5 sm:py-4 bg-amber-950/[0.06] border-l-2 border-red-900/60 rounded-r-lg italic text-stone-900 text-sm sm:text-base md:text-lg"
+            >
+              "Bintang-bintang yang ku lihat di hari-hari ku terasa hangat,
+              tidak panas dan tidak dingin. Kurasa bukan matahari"
+            </blockquote>
+
+            <p>
+              Makasih ya, kamu udah ngisi tahun-tahunku di SMAN 5 ini jadi lebih
+              berwarna, dan sekarang kamu udah di Muse. Bener kalau kamu bilang
+              "new life", iya... Kalau aku boleh jujur Quieska, aku sempetin
+              waktu di sela-sela padatnya kegiatanku untuk kamu, entah aku
+              ngobrol sama kamu, dan lain-lain, karena aku seneng 😄.
+            </p>
+
+            <p>
+              Tapi sekarang kamu udah di Muse, dan kita berpisah sekolah, aku
+              mau bilang kalau perpisahan itu ada, dan makasih yaa udah nemenin
+              aku di SMAN 5, aku seneng banget... Mungkin setelah ini kita juga
+              makin sibuk kedepannya, kamu di sekolah baru dengan urusan baru,
+              dan aku juga semakin kesini juga banyak kegiatan, ditambah fokus
+              untuk ngejar nilai dan impianku kedepannya.
+            </p>
+
+            <blockquote
+              class="my-5 sm:my-6 px-4 sm:px-5 py-3.5 sm:py-4 bg-amber-950/[0.06] border-l-2 border-red-900/60 rounded-r-lg italic text-stone-900 text-sm sm:text-base md:text-lg"
+            >
+              Semoga perpisahan ini membuat kita tumbuh jadi lebih baik yaa...
+              Kamu semangat menjalani kegiatan kedepannya, begitu pula aku.
+            </blockquote>
+
+            <p>
+              Kamu tingkatin skill-skill kamu, kemampuan akademik kamu, dan
+              kerajinan kamu. Kadang saat kamu sedih karena nilai kamu, aku juga
+              ikut sedih, jadi kamu jangan pantang menyerah ya! Walaupun susah,
+              kamu gapapa juga kalau harus istirahat sejenak, kamu harus sayang
+              diri kamu.
+            </p>
+
+            <p>
+              Kamu disana, di ruang baru, relasi baru, kegiatan baru, kamu jaga
+              diri baik-baik ya, jaga pergaulan kamu. Memang pertemanan itu
+              menyenangkan, tapi kamu harus inget batasan, ayah ibu kamu sudah
+              berusaha semaksimal mungkin untuk menghidupi kamu, membuat kamu
+              tumbuh hingga saat ini, kamu jangan menyepelekan hal itu ya,
+              sekecil apapun, karena mereka sudah berjuang untuk hidup kamu.
+            </p>
+
+            <p>
+              Sekali lagi, jaga diri kamu, aurat kamu, pakai kerudungan yang
+              bener, jangan keluar-keluar rambutnya! Posisi duduk kamu, entah di
+              lantai atau dimana pun, apalagi di tempat umum, dijaga!
+            </p>
+
+            <blockquote
+              class="my-5 sm:my-6 px-4 sm:px-5 py-3.5 sm:py-4 bg-amber-950/[0.06] border-l-2 border-red-900/60 rounded-r-lg italic text-stone-900 text-sm sm:text-base md:text-lg"
+            >
+              Ini aku peringatin loh😤.
+            </blockquote>
+
+            <p>
+              Kamu sayang terus ayah ibu kamu yaa, sesungguhnya ridha orang tua
+              itu ridha Allah juga, jangan pernah menyakiti orang tua kamu,
+              apapun itu, sekecil kamu ngomong "ck" atau "ah" usahakan
+              dihindari, nurut orang tua kamu, jangan sakiti hatinya yaa.
+            </p>
+
+            <p>
+              Quieska kedepannya lebih baik lagi, lebih pintar lagi, lebih
+              mandiri lagi dalam menjalani hari-hari, jangan lupa sholat sama
+              ngajinya.
+            </p>
+
+            <p>
+              Kamu juga lebih tingkatin kesadaran kamu akan unsur penting dalam
+              kehidupan yaa, finansial contohnya, bijak dalam menggunakan uang,
+              lebih cermat lagi, save duit kamu untuk sesuatu yang baik-baik,
+              agar kamu bisa mengelola lebih baik kedepannya 😁.
+            </p>
+
+            <blockquote
+              class="my-5 sm:my-6 px-4 sm:px-5 py-3.5 sm:py-4 bg-amber-950/[0.06] border-l-2 border-red-900/60 rounded-r-lg italic text-stone-900 text-sm sm:text-base md:text-lg"
+            >
+              Sehat selalu ya Quieska, panjang umur, dan sukses dunia akhirat,
+              Aamiin.
+            </blockquote>
+
+            <!-- Tanda Tangan Kaligrafi -->
+            <div class="pt-3 sm:pt-4 pb-5 sm:pb-6">
+              <p class="italic text-stone-700 text-sm sm:text-base">
+                Ruang dan waktu yang ku cermati
+              </p>
+              <p
+                class="font-script text-2xl sm:text-3xl md:text-4xl text-red-950 mt-1.5 sm:mt-2"
+              >
+                Cholis Abdullah Alfikri
+              </p>
+              <p
+                class="font-display text-[9px] sm:text-[10px] tracking-[0.2em] uppercase text-stone-500 mt-1"
+              >
+                ✦ CAAF ✦
+              </p>
+            </div>
+
+            <!-- Penanda Akhir Surat -->
+            <div
+              id="letter-bottom-anchor"
+              class="pt-4 pb-2 border-t border-dashed border-amber-900/30 text-center"
+            >
+              <p class="font-serif italic text-xs sm:text-sm text-red-900/80">
+                ~ Akhir dari lembaran perkamen ~
+              </p>
+            </div>
+          </div>
+
+          <!-- Footer Progres Bacaan & Tombol Lanjut (Hanya muncul saat mode Baca Ulang) -->
+          <div
+            class="relative z-10 px-5 sm:px-10 md:px-12 py-3 sm:py-3.5 bg-amber-950/[0.06] border-t border-amber-900/20 flex flex-col sm:flex-row items-center justify-between gap-2.5 shrink-0"
+          >
+            <div class="flex items-center gap-2.5 w-full sm:w-auto min-w-0">
+              <div
+                class="w-14 sm:w-16 h-1.5 bg-amber-950/15 rounded-full overflow-hidden shrink-0"
+              >
+                <div
+                  id="read-progress-bar"
+                  class="h-full bg-red-900 w-0 transition-all duration-150"
+                ></div>
+              </div>
+              <p
+                id="scroll-indicator-text"
+                class="font-serif italic text-xs sm:text-sm text-stone-700 truncate"
+              >
+                Gulir hingga akhir surat untuk membuka halaman utama...
+              </p>
+            </div>
+
+            <button
+              id="enter-site-btn"
+              type="button"
+              class="hidden w-full sm:w-auto px-4 py-2 sm:py-1.5 rounded-lg bg-red-950 text-amber-100 hover:bg-red-900 font-serif text-xs sm:text-sm tracking-wide transition-all active:scale-95 cursor-pointer shadow-sm border border-amber-400/20 shrink-0"
+            >
+              Kembali ke Halaman Utama →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================================
+         HALAMAN UTAMA WEBSITE (VINTAGE ROMANTIS & PERPUSTAKAAN KLASIK)
+    ====================================================================== -->
+    <div
+      id="main-website"
+      class="section-blend-canvas min-h-dvh text-[#f5efe6] flex flex-col"
+    >
+      <!-- Navbar Klasik -->
+      <header
+        class="sticky top-0 z-30 bg-[#181210]/75 backdrop-blur-md border-b border-amber-200/10"
+      >
+        <div
+          class="max-w-6xl mx-auto px-4 sm:px-8 h-16 md:h-20 flex items-center justify-between gap-3"
+        >
+          <a
+            href="#"
+            class="font-display text-base sm:text-xl tracking-wider text-amber-200 flex items-center gap-2 sm:gap-2.5 truncate"
+          >
+            <span class="text-red-500 text-xs sm:text-sm shrink-0">✦</span>
+            <span class="truncate">Chronicles of Us</span>
+          </a>
+
+          <nav
+            id="main-nav-links"
+            class="hidden md:flex items-center gap-7 font-serif text-lg text-amber-100/75 transition-opacity duration-500"
+          >
+            <a
+              href="#babak-kisah"
+              class="hover:text-amber-300 transition-colors"
+              >Babak Kisah</a
+            >
+            <a
+              href="#lagu-favorit"
+              class="hover:text-amber-300 transition-colors"
+              >Lagu Favorit</a
+            >
+            <a
+              href="#janji-abadi"
+              class="hover:text-amber-300 transition-colors"
+              >Janji & Harapan</a
+            >
+            <a href="#penutup" class="hover:text-amber-300 transition-colors"
+              >Catatan Akhir</a
+            >
+          </nav>
+
+          <!-- Tombol Baca Surat Kembali (Ramah Sentuhan Mobile) -->
+          <button
+            id="reopen-nav-btn"
+            type="button"
+            class="inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-2 rounded-full bg-amber-900/25 hover:bg-amber-800/40 text-amber-200 border border-amber-400/25 font-serif text-xs sm:text-base transition-all active:scale-95 cursor-pointer shrink-0"
+          >
+            <span>✉</span>
+            <span>Baca Surat Kembali</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Hero Section Romantis (Responsif di Mobile, Laptop Pendek & Desktop Lebar) -->
+      <main class="flex-1 flex flex-col">
+        <section
+          id="hero-stars-section"
+          class="hero-load-anim relative overflow-x-hidden overflow-y-auto min-h-[calc(100dvh-4rem)] md:min-h-[calc(100dvh-5rem)] flex items-center justify-center py-8 sm:py-12 lg:py-8 px-4 sm:px-8"
+        >
+          <!-- Cahaya Latar Hangat Menyatu -->
+          <div
+            class="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-[#15100e]/75"
+          ></div>
+          <div
+            class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[640px] h-[220px] sm:h-[340px] bg-amber-600/10 blur-[110px] sm:blur-[130px] rounded-full"
+          ></div>
+
+          <div
+            class="w-full max-w-4xl mx-auto text-center relative z-10 my-auto"
+          >
+            <p
+              class="hero-load-item font-display text-[10px] sm:text-xs lg:text-sm tracking-[0.22em] sm:tracking-[0.3em] uppercase text-amber-400/85 mb-2 sm:mb-3 lg:mb-2.5"
+            >
+              ✦ Bab Pertama dari perjalanan ✦
+            </p>
+            <h1
+              class="hero-load-item font-serif text-3xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-amber-50 leading-[1.12]"
+            >
+              Bunga Indah, Binar Bintang
+              <span
+                class="font-script text-4xl sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl font-normal text-amber-300 block sm:inline mt-1 sm:mt-0"
+                >Quieska Noor Nisrina</span
+              >
+            </h1>
+            <p
+              class="hero-load-item mt-4 sm:mt-5 lg:mt-4 font-serif italic text-base sm:text-lg md:text-xl lg:text-[21px] text-amber-100/75 max-w-2xl mx-auto leading-snug sm:leading-relaxed px-2"
+            >
+              "Sebagaimana perkamen tua yang menyimpan mantra paling berharga,
+              setiap detik bersamamu adalah keajaiban yang tak pernah lekang
+              oleh waktu."
+            </p>
+            <div
+              class="hero-load-item mt-6 sm:mt-8 lg:mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto"
+            >
+              <a
+                id="explore-memories-btn"
+                href="#galeri-3d"
+                class="px-6 sm:px-7 py-3 lg:py-3 rounded-xl bg-red-900 hover:bg-red-800 text-amber-100 font-serif text-base lg:text-[17px] tracking-wide border border-amber-300/20 shadow-lg transition-all text-center cursor-pointer"
+              >
+                Telusuri Jejak Kenangan
+              </a>
+              <button
+                id="reopen-hero-btn"
+                type="button"
+                class="px-6 sm:px-7 py-3 lg:py-3 rounded-xl bg-amber-200/10 hover:bg-amber-200/20 text-amber-200 font-serif text-base lg:text-[17px] border border-amber-200/20 transition-all cursor-pointer text-center"
+              >
+                Buka Kembali Amplop Surat
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Halaman-Halaman Berikutnya (Terkunci/Tersembunyi Sampai Klik "Telusuri Jejak Kenangan") -->
+        <div
+          id="unlocked-chapters"
+          class="hidden w-full max-w-full overflow-x-clip opacity-0 translate-y-6 transition-all duration-700 ease-out"
+        >
+          <!-- Panggung Animasi & Susunan 3D Tiga Foto -->
+          <section
+            id="galeri-3d"
+            class="relative overflow-x-clip py-16 sm:py-28 px-4 sm:px-8 bg-gradient-to-b from-[#181210]/0 via-[#15100e]/85 to-[#181210]/0"
+          >
+            <div
+              class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[680px] h-[220px] sm:h-[340px] bg-amber-500/10 blur-[110px] rounded-full"
+            ></div>
+
+            <div class="max-w-6xl mx-auto relative z-10">
+              <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+                <span
+                  class="font-display text-[11px] sm:text-xs tracking-[0.24em] uppercase text-amber-400/80"
+                  >✦ Bingkai Kenangan ✦</span
+                >
+                <h2
+                  class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-amber-50 mt-2 leading-tight"
+                >
+                  Tiga Potret Darimu
+                </h2>
+                <p
+                  class="mt-3 font-serif italic text-sm sm:text-base text-amber-100/70 px-2"
+                >
+                  Lukisan cahaya tampak darimu menciptakan kehangatan pada
+                  lingkungan
+                </p>
+              </div>
+
+              <!-- Susunan: Kipas 3D Berlapis di Mobile & Berjejer Horizontal 3D di Desktop -->
+              <div
+                id="photo-3d-grid"
+                class="gallery-3d-stage photo-3d-grid-mobile md:grid md:grid-cols-3 gap-7 sm:gap-8 md:gap-10 items-center"
+              >
+                <!-- Foto 1 -->
+                <figure
+                  data-photo-index="0"
+                  class="photo-3d-card memory-card group relative rounded-2xl bg-[#241b17] p-3 sm:p-4 border border-amber-300/25 shadow-[0_22px_48px_rgba(0,0,0,0.65)] hover:border-amber-300/60 cursor-pointer select-none"
+                >
+                  <div
+                    class="aspect-[4/5] w-full overflow-hidden rounded-xl bg-stone-900"
+                  >
+                    <img
+                      src="./assets/img/SP.jpeg"
+                      alt="Kenangan pertama"
+                      loading="lazy"
+                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <figcaption class="pt-3.5 pb-1 px-1 text-center">
+                    <span
+                      class="font-display text-[10px] tracking-[0.22em] uppercase text-amber-400/80"
+                    >
+                      Potret I
+                    </span>
+                    <p
+                      class="font-serif italic text-base sm:text-lg text-amber-100/90 mt-0.5"
+                    >
+                      Senyum yang menenangkan
+                    </p>
+                  </figcaption>
+                </figure>
+
+                <!-- Foto 2 -->
+                <figure
+                  data-photo-index="1"
+                  class="photo-3d-card memory-card group relative rounded-2xl bg-[#241b17] p-3 sm:p-4 border border-amber-300/25 shadow-[0_28px_60px_rgba(0,0,0,0.75)] hover:border-amber-300/60 cursor-pointer select-none"
+                >
+                  <div
+                    class="aspect-[4/5] w-full overflow-hidden rounded-xl bg-stone-900"
+                  >
+                    <img
+                      src="./assets/img/FP.svg"
+                      alt="Kenangan kedua"
+                      loading="lazy"
+                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <figcaption class="pt-3.5 pb-1 px-1 text-center">
+                    <span
+                      class="font-display text-[10px] tracking-[0.22em] uppercase text-amber-400/80"
+                    >
+                      Potret II
+                    </span>
+                    <p
+                      class="font-serif italic text-base sm:text-lg text-amber-100/90 mt-0.5"
+                    >
+                      Waktu yang terasa pelan
+                    </p>
+                  </figcaption>
+                </figure>
+
+                <!-- Foto 3 -->
+                <figure
+                  data-photo-index="2"
+                  class="photo-3d-card memory-card group relative rounded-2xl bg-[#241b17] p-3 sm:p-4 border border-amber-300/25 shadow-[0_22px_48px_rgba(0,0,0,0.65)] hover:border-amber-300/60 cursor-pointer select-none"
+                >
+                  <div
+                    class="aspect-[4/5] w-full overflow-hidden rounded-xl bg-stone-900"
+                  >
+                    <img
+                      src="./assets/img/TP.jpeg"
+                      alt="Kenangan ketiga"
+                      loading="lazy"
+                      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+                  <figcaption class="pt-3.5 pb-1 px-1 text-center">
+                    <span
+                      class="font-display text-[10px] tracking-[0.22em] uppercase text-amber-400/80"
+                    >
+                      Potret III
+                    </span>
+                    <p
+                      class="font-serif italic text-base sm:text-lg text-amber-100/90 mt-0.5"
+                    >
+                      Cahaya di setiap langkah
+                    </p>
+                  </figcaption>
+                </figure>
+              </div>
+            </div>
+          </section>
+
+          <!-- Babak Kisah Kita (Linimasa Kenangan Interaktif) -->
+          <section
+            id="babak-kisah"
+            class="relative max-w-6xl mx-auto px-4 sm:px-8 py-16 sm:py-24 md:py-28"
+          >
+            <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+              <span
+                class="font-display text-[11px] sm:text-xs tracking-[0.25em] uppercase text-amber-400/80"
+                >Arsip Kenangan</span
+              >
+              <h2
+                class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-amber-50 mt-2"
+              >
+                Babak Yang Kusinggahi
+              </h2>
+              <div
+                class="w-20 sm:w-24 h-[1px] bg-gradient-to-r from-transparent via-amber-400/35 to-transparent mx-auto mt-3.5 sm:mt-4"
+              ></div>
+              <p
+                class="mt-3 font-serif italic text-sm sm:text-base text-amber-200/60"
+              >
+                Lembar-lembar yang kutulis dan kulukis, dari cerita bunga
+              </p>
+            </div>
+
+            <div
+              id="babak-cards-grid"
+              class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 items-stretch"
+            >
+              <!-- Kartu 1 -->
+              <article
+                data-story-card
+                tabindex="0"
+                role="button"
+                aria-expanded="false"
+                class="story-expand-card h-full flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-[#221a17] border border-amber-300/15 shadow-xl relative group hover:border-amber-300/40 transition-all cursor-pointer select-none"
+              >
+                <div
+                  class="story-card-header flex items-center justify-between gap-3"
+                >
+                  <span
+                    class="font-display text-[11px] sm:text-xs tracking-widest text-amber-400/80"
+                    >BAB I • PERTEMUAN</span
+                  >
+                  <button
+                    type="button"
+                    data-story-minimize
+                    class="hidden px-3 py-1 rounded-lg bg-amber-950/80 hover:bg-amber-900/70 text-amber-100 border border-amber-300/25 font-serif text-xs transition-all cursor-pointer shrink-0"
+                  >
+                    − Perkecil
+                  </button>
+                </div>
+
+                <h3
+                  class="font-serif text-2xl sm:text-3xl font-semibold text-amber-100 mt-2.5 leading-snug"
+                >
+                  Tatap Pertama yang Tak Terduga
+                </h3>
+
+                <!-- Ringkasan singkat saat kartu belum diperbesar -->
+                <p
+                  data-story-preview
+                  class="mt-3 font-serif text-base sm:text-lg text-amber-100/70 leading-relaxed line-clamp-4"
+                >
+                  Saat semesta mempertemukan dua langkah yang semula berjalan
+                  sendiri, dan tiba-tiba percakapan sederhana terasa begitu
+                  akrab seolah telah saling mengenal sejak lama.
+                </p>
+
+                <!-- Isi cerita panjang yang bisa di-scroll saat kartu diperbesar -->
+                <div
+                  data-story-body
+                  class="story-card-scroll hidden mt-4 pt-4 border-t border-amber-300/15 max-h-[55vh] overflow-y-auto pr-2 space-y-4 font-serif text-base sm:text-lg text-amber-100/85 leading-relaxed"
+                >
+                  <p>
+                    Saat semesta mempertemukan dua langkah yang semula berjalan
+                    sendiri, dan tiba-tiba percakapan sederhana terasa begitu
+                    akrab seolah telah saling mengenal sejak lama.
+                  </p>
+                  <p>
+                    Tulis cerita panjangmu di sini—bagaimana suasananya, hal
+                    kecil apa yang paling membekas, atau perasaan pertama yang
+                    muncul tanpa sempat direncanakan.
+                  </p>
+                  <p>
+                    Tambahkan paragraf sebanyak yang kamu mau di dalam blok ini.
+                    Saat kotak diperbesar, bagian ini akan otomatis bisa
+                    di-scroll sampai baris terakhir.
+                  </p>
+                </div>
+
+                <div
+                  data-story-footer
+                  class="mt-6 pt-4 border-t border-amber-300/10 flex items-center justify-between text-xs font-serif italic text-amber-200/55 group-hover:text-amber-200/85 transition-colors"
+                >
+                  <span>Klik kotak untuk memperbesar & baca</span>
+                  <span>↗</span>
+                </div>
+              </article>
+
+              <!-- Kartu 2 -->
+              <article
+                data-story-card
+                tabindex="0"
+                role="button"
+                aria-expanded="false"
+                class="story-expand-card h-full flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-[#221a17] border border-amber-300/15 shadow-xl relative group hover:border-amber-300/40 transition-all cursor-pointer select-none"
+              >
+                <div
+                  class="story-card-header flex items-center justify-between gap-3"
+                >
+                  <span
+                    class="font-display text-[11px] sm:text-xs tracking-widest text-amber-400/80"
+                    >BAB II • PERJALANAN</span
+                  >
+                  <button
+                    type="button"
+                    data-story-minimize
+                    class="hidden px-3 py-1 rounded-lg bg-amber-950/80 hover:bg-amber-900/70 text-amber-100 border border-amber-300/25 font-serif text-xs transition-all cursor-pointer shrink-0"
+                  >
+                    − Perkecil
+                  </button>
+                </div>
+
+                <h3
+                  class="font-serif text-2xl sm:text-3xl font-semibold text-amber-100 mt-2.5 leading-snug"
+                >
+                  Tawa di Bawah Langit Senja
+                </h3>
+
+                <p
+                  data-story-preview
+                  class="mt-3 font-serif text-base sm:text-lg text-amber-100/70 leading-relaxed line-clamp-4"
+                >
+                  Setiap cerita yang kita tukar di penghujung hari mengajarkanku
+                  bahwa kebahagiaan sejati hadir dalam bentuk paling sederhana:
+                  duduk berdampingan bersamamu.
+                </p>
+
+                <div
+                  data-story-body
+                  class="story-card-scroll hidden mt-4 pt-4 border-t border-amber-300/15 max-h-[55vh] overflow-y-auto pr-2 space-y-4 font-serif text-base sm:text-lg text-amber-100/85 leading-relaxed"
+                >
+                  <p>
+                    Setiap cerita yang kita tukar di penghujung hari
+                    mengajarkanku bahwa kebahagiaan sejati hadir dalam bentuk
+                    paling sederhana: duduk berdampingan bersamamu.
+                  </p>
+                  <p>
+                    Tulis cerita panjangmu untuk Bab II di sini, lengkap dengan
+                    detail momen, perasaan, dan kenangan yang ingin kamu
+                    abadikan.
+                  </p>
+                  <p>
+                    Setiap cerita yang kita tukar di penghujung hari
+                    mengajarkanku bahwa kebahagiaan sejati hadir dalam bentuk
+                    paling sederhana: duduk berdampingan bersamamu.
+                  </p>
+                  <p>
+                    Tulis cerita panjangmu untuk Bab II di sini, lengkap dengan
+                    detail momen, perasaan, dan kenangan yang ingin kamu
+                    abadikan.
+                  </p>
+                  <p>
+                    Setiap cerita yang kita tukar di penghujung hari
+                    mengajarkanku bahwa kebahagiaan sejati hadir dalam bentuk
+                    paling sederhana: duduk berdampingan bersamamu.
+                  </p>
+                  <p>
+                    Tulis cerita panjangmu untuk Bab II di sini, lengkap dengan
+                    detail momen, perasaan, dan kenangan yang ingin kamu
+                    abadikan.
+                  </p>
+                </div>
+
+                <div
+                  data-story-footer
+                  class="mt-6 pt-4 border-t border-amber-300/10 flex items-center justify-between text-xs font-serif italic text-amber-200/55 group-hover:text-amber-200/85 transition-colors"
+                >
+                  <span>Klik kotak untuk memperbesar & baca</span>
+                  <span>↗</span>
+                </div>
+              </article>
+
+              <!-- Kartu 3 -->
+              <article
+                data-story-card
+                tabindex="0"
+                role="button"
+                aria-expanded="false"
+                class="story-expand-card h-full flex flex-col justify-between p-6 sm:p-8 rounded-2xl bg-[#221a17] border border-amber-300/15 shadow-xl relative group hover:border-amber-300/40 transition-all cursor-pointer select-none"
+              >
+                <div
+                  class="story-card-header flex items-center justify-between gap-3"
+                >
+                  <span
+                    class="font-display text-[11px] sm:text-xs tracking-widest text-amber-400/80"
+                    >BAB III • MASA DEPAN</span
+                  >
+                  <button
+                    type="button"
+                    data-story-minimize
+                    class="hidden px-3 py-1 rounded-lg bg-amber-950/80 hover:bg-amber-900/70 text-amber-100 border border-amber-300/25 font-serif text-xs transition-all cursor-pointer shrink-0"
+                  >
+                    − Perkecil
+                  </button>
+                </div>
+
+                <h3
+                  class="font-serif text-2xl sm:text-3xl font-semibold text-amber-100 mt-2.5 leading-snug"
+                >
+                  Janji yang Terus Bertumbuh
+                </h3>
+
+                <p
+                  data-story-preview
+                  class="mt-3 font-serif text-base sm:text-lg text-amber-100/70 leading-relaxed line-clamp-4"
+                >
+                  Masih banyak halaman kosong yang menunggu untuk kita tulis
+                  bersama—penuh mimpi, petualangan baru, dan kasih yang kian
+                  matang seiring berjalannya waktu.
+                </p>
+
+                <div
+                  data-story-body
+                  class="story-card-scroll hidden mt-4 pt-4 border-t border-amber-300/15 max-h-[55vh] overflow-y-auto pr-2 space-y-4 font-serif text-base sm:text-lg text-amber-100/85 leading-relaxed"
+                >
+                  <p>
+                    Masih banyak halaman kosong yang menunggu untuk kita tulis
+                    bersama—penuh mimpi, petualangan baru, dan kasih yang kian
+                    matang seiring berjalannya waktu.
+                  </p>
+                  <p>
+                    Tulis cerita panjangmu untuk Bab III di sini sebagai penutup
+                    yang hangat di bagian babak kenangan.
+                  </p>
+                </div>
+
+                <div
+                  data-story-footer
+                  class="mt-6 pt-4 border-t border-amber-300/10 flex items-center justify-between text-xs font-serif italic text-amber-200/55 group-hover:text-amber-200/85 transition-colors"
+                >
+                  <span>Klik kotak untuk memperbesar & baca</span>
+                  <span>↗</span>
+                </div>
+              </article>
+            </div>
+          </section>
+
+          <!-- ===============================================================
+               SECTION BARU: LAGU-LAGU FAVORIT KITA (10 MUSIC PLAYER)
+          ================================================================ -->
+          <section
+            id="lagu-favorit"
+            class="relative max-w-6xl mx-auto px-4 sm:px-8 py-16 sm:py-28"
+          >
+            <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
+              <span
+                data-aos="fade-up"
+                data-aos-duration="900"
+                class="font-display text-[11px] sm:text-xs tracking-[0.25em] uppercase text-amber-400/80"
+                >✦ Melodi Kenangan ✦</span
+              >
+              <h2
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-amber-50 mt-2"
+              >
+                Lagu-Lagu Favoritmu
+              </h2>
+              <div
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                class="w-20 sm:w-24 h-[1px] bg-gradient-to-r from-transparent via-amber-400/35 to-transparent mx-auto mt-3.5 sm:mt-4"
+              ></div>
+              <p
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                class="mt-3 font-serif italic text-sm sm:text-base text-amber-200/65 px-2"
+              >
+                Tekan Play untuk mendengarkan lagu favorit—musik latar utama
+                akan otomatis dijeda dan kembali menyala saat lagu ini
+                dihentikan atau selesai.
+              </p>
+            </div>
+
+            <!-- Baris Status Pemutar Lagu Aktif -->
+            <div
+              id="now-playing-banner"
+              class="mb-8 w-full max-w-full overflow-hidden px-4 sm:px-6 py-3.5 rounded-2xl bg-[#221a17]/90 border border-amber-300/20 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3"
+            >
+              <div class="flex items-center gap-3 w-full sm:flex-1 min-w-0">
+                <span
+                  id="now-playing-badge"
+                  class="inline-flex items-center justify-center w-8 h-8 rounded-full bg-amber-900/40 text-amber-300 border border-amber-300/25 text-sm shrink-0"
+                  >♪</span
+                >
+                <div
+                  id="now-playing-marquee"
+                  class="marquee-viewport flex-1 min-w-0 overflow-hidden"
+                >
+                  <div class="marquee-track">
+                    <p
+                      id="now-playing-text"
+                      class="marquee-item font-serif italic text-sm sm:text-base text-amber-100/85"
+                    >
+                      Musik Utama: Mrs. Magic (Strings Version)
+                    </p>
+                    <p
+                      id="now-playing-text-clone"
+                      aria-hidden="true"
+                      class="marquee-item font-serif italic text-sm sm:text-base text-amber-100/85"
+                    >
+                      Musik Utama: Mrs. Magic (Strings Version)
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <button
+                id="stop-favorite-track-btn"
+                type="button"
+                class="hidden w-full sm:w-auto px-4 py-2 sm:py-1.5 rounded-lg bg-red-950 hover:bg-red-900 text-amber-100 border border-amber-300/25 font-serif text-xs sm:text-sm transition-all cursor-pointer shrink-0 text-center"
+              >
+                ■ Stop & Lanjut Mrs. Magic
+              </button>
+            </div>
+
+            <!-- Grid 10 Music Player (Ganti data-audio-src & src gambar sesuai file milikmu) -->
+            <div
+              id="favorite-tracks-grid"
+              class="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5"
+            >
+              <!-- Track 01 -->
+              <div
+                data-aos="fade-up"
+                data-aos-duration="800"
+                data-track-card
+                class="memory-card rounded-2xl bg-[#221a17] border border-amber-300/15 hover:border-amber-300/40 p-4 sm:p-5 shadow-lg transition-all"
+              >
+                <div class="flex items-center justify-between gap-3.5">
+                  <div class="flex items-center gap-3.5 min-w-0">
+                    <div
+                      data-track-cover-wrap
+                      class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-[#181210] border border-amber-300/25 shrink-0 flex items-center justify-center shadow-inner"
+                    >
+                      <img
+                        src="./assets/img/applecider.svg"
+                        alt="Cover Lagu Favorit Pertama"
+                        loading="lazy"
+                        onerror="
+                          this.classList.add('hidden');
+                          this.nextElementSibling.classList.remove('hidden');
+                        "
+                        class="w-full h-full object-cover"
+                      />
+                      <span
+                        class="hidden font-serif text-xl text-amber-300/85 select-none"
+                        >♫</span
+                      >
+                    </div>
+                    <div class="min-w-0">
+                      <span
+                        class="font-display text-[10px] tracking-[0.2em] uppercase text-amber-400/80"
+                        >Lagu 01</span
+                      >
+                      <h3
+                        class="font-serif text-xl sm:text-2xl font-semibold text-amber-100 truncate"
+                      >
+                        Apple Cider
+                      </h3>
+                      <p
+                        class="font-serif italic text-xs sm:text-sm text-amber-100/60 truncate"
+                      >
+                        beabadoobee
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    data-track-btn
+                    data-audio-src="./assets/sound/beabadoobee_-_Apple_Cider_(mp3.pm).mp3"
+                    data-track-title="Lagu Favorit Pertama"
+                    aria-pressed="false"
+                    class="px-4 py-2 rounded-xl bg-amber-900/35 hover:bg-amber-800/50 text-amber-100 border border-amber-300/25 font-serif text-sm tracking-wide transition-all active:scale-95 cursor-pointer shrink-0"
+                  >
+                    ▶ Play
+                  </button>
+                </div>
+                <div class="mt-3.5 flex items-center gap-3">
+                  <span
+                    data-track-time
+                    class="font-sans text-[11px] text-amber-200/60 w-10 shrink-0"
+                    >0:00</span
+                  >
+                  <input
+                    type="range"
+                    data-track-seek
+                    min="0"
+                    max="100"
+                    value="0"
+                    step="0.1"
+                    aria-label="Geser posisi Lagu Favorit Pertama"
+                    class="flex-1 h-1.5 bg-amber-950/70 rounded-lg accent-amber-400 cursor-pointer"
+                  />
+                  <span
+                    data-track-duration
+                    class="font-sans text-[11px] text-amber-200/60 w-10 text-right shrink-0"
+                    >0:00</span
+                  >
+                </div>
+              </div>
+
+              <!-- Track 02 -->
+              <div
+                data-aos="fade-up"
+                data-aos-duration="850"
+                data-track-card
+                class="memory-card rounded-2xl bg-[#221a17] border border-amber-300/15 hover:border-amber-300/40 p-4 sm:p-5 shadow-lg transition-all"
+              >
+                <div class="flex items-center justify-between gap-3.5">
+                  <div class="flex items-center gap-3.5 min-w-0">
+                    <div
+                      data-track-cover-wrap
+                      class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-[#181210] border border-amber-300/25 shrink-0 flex items-center justify-center shadow-inner"
+                    >
+                      <img
+                        src="./assets/img/music-02.jpg"
+                        alt="Cover Lagu Favorit Kedua"
+                        loading="lazy"
+                        onerror="
+                          this.classList.add('hidden');
+                          this.nextElementSibling.classList.remove('hidden');
+                        "
+                        class="w-full h-full object-cover"
+                      />
+                      <span
+                        class="hidden font-serif text-xl text-amber-300/85 select-none"
+                        >♫</span
+                      >
+                    </div>
+                    <div class="min-w-0">
+                      <span
+                        class="font-display text-[10px] tracking-[0.2em] uppercase text-amber-400/80"
+                        >Lagu 02</span
+                      >
+                      <h3
+                        class="font-serif text-xl sm:text-2xl font-semibold text-amber-100 truncate"
+                      >
+                        The Only Exception
+                      </h3>
+                      <p
+                        class="font-serif italic text-xs sm:text-sm text-amber-100/60 truncate"
+                      >
+                        Catatan kecil di balik melodi ini
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    data-track-btn
+                    data-audio-src="./assets/sound/track-02.mp3"
+                    data-track-title="Lagu Favorit Kedua"
+                    aria-pressed="false"
+                    class="px-4 py-2 rounded-xl bg-amber-900/35 hover:bg-amber-800/50 text-amber-100 border border-amber-300/25 font-serif text-sm tracking-wide transition-all active:scale-95 cursor-pointer shrink-0"
+                  >
+                    ▶ Play
+                  </button>
+                </div>
+                <div class="mt-3.5 flex items-center gap-3">
+                  <span
+                    data-track-time
+                    class="font-sans text-[11px] text-amber-200/60 w-10 shrink-0"
+                    >0:00</span
+                  >
+                  <input
+                    type="range"
+                    data-track-seek
+                    min="0"
+                    max="100"
+                    value="0"
+                    step="0.1"
+                    aria-label="Geser posisi Lagu Favorit Kedua"
+                    class="flex-1 h-1.5 bg-amber-950/70 rounded-lg accent-amber-400 cursor-pointer"
+                  />
+                  <span
+                    data-track-duration
+                    class="font-sans text-[11px] text-amber-200/60 w-10 text-right shrink-0"
+                    >0:00</span
+                  >
+                </div>
+              </div>
+
+              <!-- Track 03 -->
+              <div
+                data-aos="fade-up"
+                data-aos-duration="900"
+                data-track-card
+                class="memory-card rounded-2xl bg-[#221a17] border border-amber-300/15 hover:border-amber-300/40 p-4 sm:p-5 shadow-lg transition-all"
+              >
+                <div class="flex items-center justify-between gap-3.5">
+                  <div class="flex items-center gap-3.5 min-w-0">
+                    <div
+                      data-track-cover-wrap
+                      class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-[#181210] border border-amber-300/25 shrink-0 flex items-center justify-center shadow-inner"
+                    >
+                      <img
+                        src="./assets/img/music-03.jpg"
+                        alt="Cover Lagu Favorit Ketiga"
+                        loading="lazy"
+                        onerror="
+                          this.classList.add('hidden');
+                          this.nextElementSibling.classList.remove('hidden');
+                        "
+                        class="w-full h-full object-cover"
+                      />
+                      <span
+                        class="hidden font-serif text-xl text-amber-300/85 select-none"
+                        >♫</span
+                      >
+                    </div>
+                    <div class="min-w-0">
+                      <span
+                        class="font-display text-[10px] tracking-[0.2em] uppercase text-amber-400/80"
+                        >Lagu 03</span
+                      >
+                      <h3
+                        class="font-serif text-xl sm:text-2xl font-semibold text-amber-100 truncate"
+                      >
+                        Puppy Love
+                      </h3>
+                      <p
+                        class="font-serif italic text-xs sm:text-sm text-amber-100/60 truncate"
+                      >
+                        Catatan kecil di balik melodi ini
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    data-track-btn
+                    data-audio-src="./assets/sound/track-03.mp3"
+                    data-track-title="Lagu Favorit Ketiga"
+                    aria-pressed="false"
+                    class="px-4 py-2 rounded-xl bg-amber-900/35 hover:bg-amber-800/50 text-amber-100 border border-amber-300/25 font-serif text-sm tracking-wide transition-all active:scale-95 cursor-pointer shrink-0"
+                  >
+                    ▶ Play
+                  </button>
+                </div>
+                <div class="mt-3.5 flex items-center gap-3">
+                  <span
+                    data-track-time
+                    class="font-sans text-[11px] text-amber-200/60 w-10 shrink-0"
+                    >0:00</span
+                  >
+                  <input
+                    type="range"
+                    data-track-seek
+                    min="0"
+                    max="100"
+                    value="0"
+                    step="0.1"
+                    aria-label="Geser posisi Lagu Favorit Ketiga"
+                    class="flex-1 h-1.5 bg-amber-950/70 rounded-lg accent-amber-400 cursor-pointer"
+                  />
+                  <span
+                    data-track-duration
+                    class="font-sans text-[11px] text-amber-200/60 w-10 text-right shrink-0"
+                    >0:00</span
+                  >
+                </div>
+              </div>
+
+              <!-- Track 04 -->
+              <div
+                data-aos="fade-up"
+                data-aos-duration="950"
+                data-track-card
+                class="memory-card rounded-2xl bg-[#221a17] border border-amber-300/15 hover:border-amber-300/40 p-4 sm:p-5 shadow-lg transition-all"
+              >
+                <div class="flex items-center justify-between gap-3.5">
+                  <div class="flex items-center gap-3.5 min-w-0">
+                    <div
+                      data-track-cover-wrap
+                      class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-[#181210] border border-amber-300/25 shrink-0 flex items-center justify-center shadow-inner"
+                    >
+                      <img
+                        src="./assets/img/music-04.jpg"
+                        alt="Cover Lagu Favorit Keempat"
+                        loading="lazy"
+                        onerror="
+                          this.classList.add('hidden');
+                          this.nextElementSibling.classList.remove('hidden');
+                        "
+                        class="w-full h-full object-cover"
+                      />
+                      <span
+                        class="hidden font-serif text-xl text-amber-300/85 select-none"
+                        >♫</span
+                      >
+                    </div>
+                    <div class="min-w-0">
+                      <span
+                        class="font-display text-[10px] tracking-[0.2em] uppercase text-amber-400/80"
+                        >Lagu 04</span
+                      >
+                      <h3
+                        class="font-serif text-xl sm:text-2xl font-semibold text-amber-100 truncate"
+                      >
+                        Kingston
+                      </h3>
+                      <p
+                        class="font-serif italic text-xs sm:text-sm text-amber-100/60 truncate"
+                      >
+                        Catatan kecil di balik melodi ini
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    data-track-btn
+                    data-audio-src="./assets/sound/track-04.mp3"
+                    data-track-title="Lagu Favorit Keempat"
+                    aria-pressed="false"
+                    class="px-4 py-2 rounded-xl bg-amber-900/35 hover:bg-amber-800/50 text-amber-100 border border-amber-300/25 font-serif text-sm tracking-wide transition-all active:scale-95 cursor-pointer shrink-0"
+                  >
+                    ▶ Play
+                  </button>
+                </div>
+                <div class="mt-3.5 flex items-center gap-3">
+                  <span
+                    data-track-time
+                    class="font-sans text-[11px] text-amber-200/60 w-10 shrink-0"
+                    >0:00</span
+                  >
+                  <input
+                    type="range"
+                    data-track-seek
+                    min="0"
+                    max="100"
+                    value="0"
+                    step="0.1"
+                    aria-label="Geser posisi Lagu Favorit Keempat"
+                    class="flex-1 h-1.5 bg-amber-950/70 rounded-lg accent-amber-400 cursor-pointer"
+                  />
+                  <span
+                    data-track-duration
+                    class="font-sans text-[11px] text-amber-200/60 w-10 text-right shrink-0"
+                    >0:00</span
+                  >
+                </div>
+              </div>
+
+              <!-- Track 05 -->
+              <div
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                data-track-card
+                class="memory-card rounded-2xl bg-[#221a17] border border-amber-300/15 hover:border-amber-300/40 p-4 sm:p-5 shadow-lg transition-all"
+              >
+                <div class="flex items-center justify-between gap-3.5">
+                  <div class="flex items-center gap-3.5 min-w-0">
+                    <div
+                      data-track-cover-wrap
+                      class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-[#181210] border border-amber-300/25 shrink-0 flex items-center justify-center shadow-inner"
+                    >
+                      <img
+                        src="./assets/img/music-05.jpg"
+                        alt="Cover Lagu Favorit Kelima"
+                        loading="lazy"
+                        onerror="
+                          this.classList.add('hidden');
+                          this.nextElementSibling.classList.remove('hidden');
+                        "
+                        class="w-full h-full object-cover"
+                      />
+                      <span
+                        class="hidden font-serif text-xl text-amber-300/85 select-none"
+                        >♫</span
+                      >
+                    </div>
+                    <div class="min-w-0">
+                      <span
+                        class="font-display text-[10px] tracking-[0.2em] uppercase text-amber-400/80"
+                        >Lagu 05</span
+                      >
+                      <h3
+                        class="font-serif text-xl sm:text-2xl font-semibold text-amber-100 truncate"
+                      >
+                        Legendary Lovers
+                      </h3>
+                      <p
+                        class="font-serif italic text-xs sm:text-sm text-amber-100/60 truncate"
+                      >
+                        Catatan kecil di balik melodi ini
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    data-track-btn
+                    data-audio-src="./assets/sound/track-05.mp3"
+                    data-track-title="Lagu Favorit Kelima"
+                    aria-pressed="false"
+                    class="px-4 py-2 rounded-xl bg-amber-900/35 hover:bg-amber-800/50 text-amber-100 border border-amber-300/25 font-serif text-sm tracking-wide transition-all active:scale-95 cursor-pointer shrink-0"
+                  >
+                    ▶ Play
+                  </button>
+                </div>
+                <div class="mt-3.5 flex items-center gap-3">
+                  <span
+                    data-track-time
+                    class="font-sans text-[11px] text-amber-200/60 w-10 shrink-0"
+                    >0:00</span
+                  >
+                  <input
+                    type="range"
+                    data-track-seek
+                    min="0"
+                    max="100"
+                    value="0"
+                    step="0.1"
+                    aria-label="Geser posisi Lagu Favorit Kelima"
+                    class="flex-1 h-1.5 bg-amber-950/70 rounded-lg accent-amber-400 cursor-pointer"
+                  />
+                  <span
+                    data-track-duration
+                    class="font-sans text-[11px] text-amber-200/60 w-10 text-right shrink-0"
+                    >0:00</span
+                  >
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Kutipan Perkamen di Halaman Utama -->
+          <section
+            id="janji-abadi"
+            class="relative py-16 sm:py-28 px-4 sm:px-8 bg-gradient-to-b from-[#181210]/0 via-[#130e0c]/85 to-[#181210]/0"
+          >
+            <div
+              class="memory-card max-w-3xl mx-auto parchment-paper text-stone-900 p-6 sm:p-12 md:p-14 rounded-2xl border-2 border-amber-900/40 text-center relative cursor-pointer"
+            >
+              <div
+                class="pointer-events-none absolute inset-2 sm:inset-2.5 border border-amber-900/25 rounded-xl"
+              ></div>
+              <span
+                class="font-display text-[11px] sm:text-xs tracking-[0.25em] uppercase text-red-900 font-bold"
+                >Mantra Hati</span
+              >
+              <blockquote
+                class="font-serif italic text-xl sm:text-2xl md:text-3xl text-stone-900 mt-3 sm:mt-4 leading-relaxed"
+              >
+                "Dalam setiap kehidupan yang mungkin ada, aku akan selalu
+                mencarimu, mengenalimu dari hangat senyummu, dan jatuh cinta
+                padamu sekali lagi."
+              </blockquote>
+              <p
+                class="font-script text-2xl sm:text-3xl text-red-950 mt-4 sm:mt-5"
+              >
+                Selamanya & Senantiasa
+              </p>
+            </div>
+          </section>
+
+          <!-- Penutup -->
+          <section
+            id="penutup"
+            class="max-w-4xl mx-auto px-4 sm:px-8 py-16 sm:py-20 text-center"
+          >
+            <p class="font-serif italic text-lg sm:text-xl text-amber-100/75">
+              Ingin kembali merasakan hangatnya kata-kata di dalam amplop
+              perkamen?
+            </p>
+            <button
+              id="reopen-footer-btn"
+              type="button"
+              class="mt-5 sm:mt-6 px-6 sm:px-7 py-3 rounded-full bg-amber-300 text-stone-950 hover:bg-amber-200 font-serif font-semibold text-base sm:text-lg transition-all shadow-lg active:scale-95 cursor-pointer"
+            >
+              ✉ Buka Kembali Surat Perkamen
+            </button>
+          </section>
+
+          <footer
+            class="border-t border-amber-200/10 py-6 sm:py-8 px-4 text-center font-serif text-xs sm:text-sm text-amber-100/50"
+          >
+            <p>Dirangkai dengan penuh kasih & keajaiban • 2026</p>
+          </footer>
+        </div>
+      </main>
+    </div>
+
+    <!-- =====================================================================
+         LOGIKA ANIMASI AMPLOP, MODAL TENGAH LAYAR, PARTIKEL KLIK, & SCROLL
+    ====================================================================== -->
+    <audio id="bg-music" loop preload="auto">
+      <source
+        src="./assets/sound/Strawberry_Guy_-_Mrs_Magic_Strings_Version_(mp3.pm).aac"
+        type="audio/mpeg"
+      />
+    </audio>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init({
+        once: true,
+      });
+    </script>
+    <script src="./src/script/letter.js" defer></script>
+  </body>
+</html>

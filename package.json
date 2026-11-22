@@ -1,0 +1,13 @@
+{
+  "name": "surat-cinta-kenangan",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.5",
+    "tailwindcss": "^4.3.5"
+  },
+  "scripts": {
+    "dev": "tailwindcss -i ./src/input.css -o ./src/css/output.css --watch",
+    "build": "tailwindcss -i ./src/input.css -o ./src/css/output.css --minify"
+  }
+}
