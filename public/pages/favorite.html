@@ -32,11 +32,45 @@
       aria-hidden="true"
     ></div>
 
+    <!-- Lightbox untuk Potret Dia -->
+    <div
+      id="portrait-lightbox-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      class="portrait-lightbox-modal"
+    >
+      <div class="portrait-lightbox-card">
+        <button
+          id="portrait-lightbox-close"
+          type="button"
+          aria-label="Tutup pratinjau potret"
+          class="portrait-lightbox-close"
+        >
+          ✕ Tutup
+        </button>
+        <img
+          id="portrait-lightbox-img"
+          src=""
+          alt=""
+          class="portrait-lightbox-img"
+        />
+        <p id="portrait-lightbox-caption" class="portrait-lightbox-caption"></p>
+      </div>
+    </div>
+
     <div
       id="main-website"
       class="fav-canvas min-h-dvh text-[#f5efe6] flex flex-col relative overflow-x-clip"
     >
-      <!-- Navbar Paten -->
+      <!-- Layer Kunang-Kunang / Constellation Interaktif -->
+      <div
+        id="fav-firefly-layer"
+        class="fav-firefly-layer"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Navbar Paten + Scroll Progress Thread -->
       <header
         class="fixed top-0 inset-x-0 z-40 bg-[#181210]/90 backdrop-blur-md border-b border-amber-200/10"
       >
@@ -83,6 +117,9 @@
             <span>←</span>
             <span>Kembali</span>
           </a>
+        </div>
+        <div class="scroll-progress-track" aria-hidden="true">
+          <div id="scroll-progress-thread" class="scroll-progress-thread"></div>
         </div>
       </header>
 
@@ -153,6 +190,12 @@
               aria-label="Kupu-kupu ungu 3 dimensi, sentuh dan geser untuk memutar 360 derajat"
               class="butterfly-3d-stage relative z-10 w-full max-w-md h-[190px] sm:h-[245px] lg:h-[260px] flex items-center justify-center cursor-grab active:cursor-grabbing rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-300/50"
             >
+              <div
+                id="butterfly-ripple-layer"
+                class="butterfly-ripple-layer"
+                aria-hidden="true"
+              ></div>
+
               <div id="butterfly-3d-pivot" class="butterfly-3d-pivot">
                 <!-- Sayap Kiri 3D -->
                 <div class="butterfly-wing-left">
@@ -396,7 +439,7 @@
             </div>
 
             <div
-              class="relative z-10 mt-2 flex flex-wrap items-center justify-center gap-2.5"
+              class="relative z-10 mt-2 flex flex-wrap items-center justify-center gap-2 sm:gap-2.5"
             >
               <span
                 id="butterfly-angle-readout"
@@ -404,6 +447,27 @@
               >
                 Sentuh & Putar 360°
               </span>
+              <button
+                type="button"
+                data-butterfly-mood="twilight"
+                class="butterfly-mood-btn is-active font-serif text-xs sm:text-sm px-3 py-1 rounded-full border transition-all cursor-pointer"
+              >
+                Senja Ungu
+              </button>
+              <button
+                type="button"
+                data-butterfly-mood="amber"
+                class="butterfly-mood-btn font-serif text-xs sm:text-sm px-3 py-1 rounded-full border transition-all cursor-pointer"
+              >
+                Bintang Hangat
+              </button>
+              <button
+                type="button"
+                data-butterfly-mood="nocturne"
+                class="butterfly-mood-btn font-serif text-xs sm:text-sm px-3 py-1 rounded-full border transition-all cursor-pointer"
+              >
+                Malam Tenang
+              </button>
               <button
                 id="butterfly-reset-btn"
                 type="button"
@@ -433,6 +497,7 @@
               </div>
 
               <p
+                id="butterfly-mood-caption"
                 class="font-serif italic text-base sm:text-xl text-amber-100/85 tracking-wide"
               >
                 Warna dan hewan favorite mu
@@ -446,7 +511,7 @@
             </div>
           </div>
 
-          <!-- Logo Scroll Down Simple & Klasik Bouncing (sedikit naik dari bawah layar) -->
+          <!-- Logo Scroll Down Simple & Klasik Bouncing -->
           <a
             href="#potret-dia"
             aria-label="Gulir ke potret dia"
@@ -507,27 +572,15 @@
                 class="portrait-photo-3d aspect-[4/5] w-full rounded-2xl overflow-hidden border border-amber-200/15 bg-[#140e0d] flex items-center justify-center"
               >
                 <img
-                  src=""
+                  src="../../assets/img/FP.svg"
                   alt="Potret dia 1"
-                  class="w-full h-full object-cover"
+                  data-lightbox-trigger
+                  class="w-full h-full object-cover cursor-zoom-in"
                   onerror="
                     this.classList.add('hidden');
                     this.nextElementSibling.classList.remove('hidden');
                   "
                 />
-                <div
-                  class="px-6 text-center flex flex-col items-center justify-center gap-2"
-                >
-                  <span
-                    class="font-script text-4xl sm:text-5xl text-purple-200/85"
-                    >Potret 01</span
-                  >
-                  <p
-                    class="font-serif italic text-sm sm:text-base text-amber-100/60"
-                  >
-                    Masukkan foto dia di sini
-                  </p>
-                </div>
               </div>
 
               <figcaption
@@ -553,27 +606,15 @@
                 class="portrait-photo-3d aspect-[4/5] w-full rounded-2xl overflow-hidden border border-amber-200/15 bg-[#140e0d] flex items-center justify-center"
               >
                 <img
-                  src=""
+                  src="../../assets/img/SP.jpeg"
                   alt="Potret dia 2"
-                  class="w-full h-full object-cover"
+                  data-lightbox-trigger
+                  class="w-full h-full object-cover cursor-zoom-in"
                   onerror="
                     this.classList.add('hidden');
                     this.nextElementSibling.classList.remove('hidden');
                   "
                 />
-                <div
-                  class="px-6 text-center flex flex-col items-center justify-center gap-2"
-                >
-                  <span
-                    class="font-script text-4xl sm:text-5xl text-purple-200/85"
-                    >Potret 02</span
-                  >
-                  <p
-                    class="font-serif italic text-sm sm:text-base text-amber-100/60"
-                  >
-                    Masukkan foto dia di sini
-                  </p>
-                </div>
               </div>
 
               <figcaption
@@ -627,18 +668,28 @@
               aria-expanded="false"
               class="memory-entry-card cursor-pointer rounded-3xl border border-amber-300/15 bg-[#221a17]/80 backdrop-blur-md p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
             >
-              <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center justify-between gap-2 flex-wrap">
                 <span
                   class="font-display text-[10px] tracking-[0.25em] uppercase text-purple-300/85"
                 >
                   ✦ Kenangan #01 ✦
                 </span>
-                <span
-                  data-expand-label
-                  class="font-serif italic text-xs sm:text-sm text-amber-200/75"
-                >
-                  Klik untuk membuka
-                </span>
+                <div class="flex items-center gap-2.5">
+                  <button
+                    type="button"
+                    data-pin-memory
+                    aria-pressed="false"
+                    class="memory-pin-btn font-serif italic text-xs px-2.5 py-0.5 rounded-full border transition-all cursor-pointer"
+                  >
+                    ✧ Pin
+                  </button>
+                  <span
+                    data-expand-label
+                    class="font-serif italic text-xs sm:text-sm text-amber-200/75"
+                  >
+                    Klik untuk membuka
+                  </span>
+                </div>
               </div>
 
               <h3
@@ -651,7 +702,7 @@
                 data-memory-detail
                 class="memory-scroll-area mt-3 font-serif text-base sm:text-lg text-amber-100/80 leading-relaxed max-h-36 overflow-y-auto pr-1"
               >
-                <p>
+                <p data-typewriter-text>
                   Tulis cerita kenangan favoritmu bersamanya di sini — mulai
                   dari obrolan ringan, tawa yang tak terduga, sampai momen kecil
                   yang selalu bikin hari terasa lebih hangat.
@@ -665,18 +716,28 @@
               aria-expanded="false"
               class="memory-entry-card cursor-pointer rounded-3xl border border-amber-300/15 bg-[#221a17]/80 backdrop-blur-md p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
             >
-              <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center justify-between gap-2 flex-wrap">
                 <span
                   class="font-display text-[10px] tracking-[0.25em] uppercase text-purple-300/85"
                 >
                   ✦ Kenangan #02 ✦
                 </span>
-                <span
-                  data-expand-label
-                  class="font-serif italic text-xs sm:text-sm text-amber-200/75"
-                >
-                  Klik untuk membuka
-                </span>
+                <div class="flex items-center gap-2.5">
+                  <button
+                    type="button"
+                    data-pin-memory
+                    aria-pressed="false"
+                    class="memory-pin-btn font-serif italic text-xs px-2.5 py-0.5 rounded-full border transition-all cursor-pointer"
+                  >
+                    ✧ Pin
+                  </button>
+                  <span
+                    data-expand-label
+                    class="font-serif italic text-xs sm:text-sm text-amber-200/75"
+                  >
+                    Klik untuk membuka
+                  </span>
+                </div>
               </div>
 
               <h3
@@ -689,7 +750,7 @@
                 data-memory-detail
                 class="memory-scroll-area mt-3 font-serif text-base sm:text-lg text-amber-100/80 leading-relaxed max-h-36 overflow-y-auto pr-1"
               >
-                <p>
+                <p data-typewriter-text>
                   Simpan catatan tentang hal-hal yang paling dia sukai, cerita
                   kecil di balik warna ungu, dan alasan kenapa hal-hal tersebut
                   selalu terasa istimewa.
@@ -710,6 +771,7 @@
           class="diagonal-track-node scroll-entrance-section mt-8 sm:mt-14"
         >
           <div
+            id="portal-magnetic-shell"
             class="exclusive-curtain-shell rounded-[2rem] border border-purple-300/30 bg-gradient-to-b from-[#2a1933]/92 via-[#1e141c]/95 to-[#171110]/98 shadow-[0_32px_80px_rgba(0,0,0,0.82),inset_0_1px_1px_rgba(243,232,255,0.22)] px-6 py-14 sm:px-12 sm:py-20 text-center"
           >
             <div aria-hidden="true" class="exclusive-curtain-left"></div>
@@ -718,6 +780,11 @@
             <div
               aria-hidden="true"
               class="pointer-events-none absolute inset-4 rounded-[1.5rem] border border-amber-300/15"
+            ></div>
+            <div
+              id="portal-halo-ring"
+              class="portal-halo-ring"
+              aria-hidden="true"
             ></div>
 
             <div class="relative z-10 max-w-2xl mx-auto">
@@ -796,9 +863,11 @@
     </div>
 
     <!-- ===================================================================
-         POPUP MINIMALIS PREMIUM:
-         "Selamat ulang tahun ke-" + ANGKA 0..17 NGEPOP + DOA + BUNGA + LAGU AUTO-LOOP
-         Tombol tutup berada di bawah dan di luar kartu popup
+         POPUP FULL SCREEN ANIME (YOUR NAME / TWILIGHT ATMOSPHERE):
+         - Kilau komet / senja pembuka
+         - Daun jatuh (normal, nyangkut di tepi atas kartu lalu jatuh, & dekat kamera blur)
+         - 1 Slot Foto Dia dengan bingkai estetik & animasi bunga menyusun (~5 detik)
+         - Hitungan 0..17 ngepop + Doa & Harapan Bergantian untuk Quieska Noor Nisrina + Lagu Auto-Loop
     ==================================================================== -->
     <div
       id="birthday-grand-popup"
@@ -806,64 +875,162 @@
       aria-modal="true"
       aria-labelledby="birthday-popup-title"
       aria-hidden="true"
-      class="birthday-grand-modal"
+      class="birthday-grand-modal anime-twilight-popup"
     >
-      <!-- Layer Bunga Bertebaran di Seluruh Layar -->
+      <!-- Kilau Komet / Senja Pembuka -->
+      <div
+        id="anime-comet-prelude"
+        class="anime-comet-prelude"
+        aria-hidden="true"
+      >
+        <div class="anime-comet-streak"></div>
+      </div>
+
+      <!-- Atmosfer Langit Senja Anime ala Your Name -->
+      <div class="anime-sky-backdrop" aria-hidden="true">
+        <div class="anime-twilight-orb"></div>
+        <div class="anime-god-rays"></div>
+        <div id="anime-starlight-layer" class="anime-starlight-layer"></div>
+      </div>
+
+      <!-- Layer Daun Berjatuhan: Normal, Nyangkut di Atas Kartu, & Dekat Kamera (Blur) -->
       <div
         id="birthday-flowers-layer"
         class="birthday-flowers-fullscreen"
         aria-hidden="true"
       ></div>
+      <div
+        id="anime-perched-leaves-layer"
+        class="anime-perched-leaves-layer"
+        aria-hidden="true"
+      ></div>
+      <div
+        id="anime-foreground-blur-layer"
+        class="anime-foreground-blur-layer"
+        aria-hidden="true"
+      ></div>
 
-      <!-- Kartu Minimalis Premium -->
-      <div class="birthday-minimal-premium-card">
-        <span class="text-amber-300/80 text-xs tracking-[0.35em] mb-2">
-          ✦
-        </span>
+      <!-- Kartu Ucapan Anime Full-Screen Stage -->
+      <div class="anime-popup-stage-wrap">
+        <div class="birthday-minimal-premium-card anime-your-name-card">
+          <div class="anime-card-topline">
+            <span>✦</span>
+            <span
+              class="font-display text-[10px] sm:text-xs tracking-[0.32em] uppercase text-amber-200/85"
+            >
+              ✦ Kata Musubi • Senja ke-17 ✦
+            </span>
+            <span>✦</span>
+          </div>
 
-        <p
-          id="birthday-popup-title"
-          class="font-serif italic text-xl sm:text-3xl text-amber-100/90 tracking-wide"
-        >
-          Selamat ulang tahun ke-
-        </p>
+          <!-- Grid Utama: Kiri (Foto Dia) & Kanan (Ucapan + Angka 0..17 + Doa) -->
+          <div class="anime-card-grid">
+            <!-- Tempat 1 Gambar Dia dengan Bingkai Estetik & Animasi Bunga Menyusun (~5 detik) -->
+            <div class="anime-dia-photo-frame">
+              <div class="anime-photo-frame-glow" aria-hidden="true"></div>
+              <span class="anime-frame-corner is-tl" aria-hidden="true">✦</span>
+              <span class="anime-frame-corner is-tr" aria-hidden="true">✧</span>
+              <span class="anime-frame-corner is-bl" aria-hidden="true">✧</span>
+              <span class="anime-frame-corner is-br" aria-hidden="true">✦</span>
 
-        <!-- Angka 0 -> 1 -> 2 ... -> 17 Lalu Ngepop -->
-        <div
-          class="my-3 sm:my-4 flex items-center justify-center min-h-[92px] sm:min-h-[150px]"
-        >
-          <span id="birthday-age-counter" class="age-number-giant">0</span>
+              <div class="anime-photo-inner-clip">
+                <div
+                  id="anime-photo-petal-layer"
+                  class="anime-photo-petal-assembly-layer"
+                  aria-hidden="true"
+                ></div>
+                <img
+                  id="birthday-dia-photo"
+                  src="../../assets/img/FP.svg"
+                  alt="Foto Quieska Noor Nisrina"
+                  class="anime-dia-photo-img"
+                  onerror="
+                    this.classList.add('hidden');
+                    this.nextElementSibling.classList.remove('hidden');
+                  "
+                />
+                <div class="anime-dia-photo-placeholder hidden">
+                  <span class="anime-photo-badge">✦ Potret Spesial ✦</span>
+                  <p class="font-script text-3xl text-purple-200/90">
+                    Quieska Noor Nisrina
+                  </p>
+                </div>
+                <div class="anime-photo-shine" aria-hidden="true"></div>
+              </div>
+            </div>
+
+            <!-- Konten Ucapan, Angka 0..17, & Doa -->
+            <div class="anime-card-content">
+              <p
+                id="birthday-popup-title"
+                class="font-serif italic text-lg sm:text-2xl text-amber-100/95 tracking-wide"
+              >
+                Selamat ulang tahun ke-
+              </p>
+
+              <!-- Angka 0 -> 1 -> 2 ... -> 17 Lalu Ngepop -->
+              <div
+                class="my-1 sm:my-2 flex items-center justify-center min-h-[68px] sm:min-h-[108px]"
+              >
+                <span id="birthday-age-counter" class="age-number-giant"
+                  >0</span
+                >
+              </div>
+
+              <p class="font-script text-2xl sm:text-4xl text-purple-200">
+                Quieska Noor Nisrina
+              </p>
+
+              <!-- Doa di Bawah Angka -->
+              <div
+                id="birthday-prayer-block"
+                class="prayer-block-reveal mt-3 sm:mt-4 border-t border-amber-200/20 pt-3 w-full"
+              >
+                <p
+                  class="font-serif italic text-sm sm:text-lg text-amber-100/90 leading-snug"
+                >
+                  "Semoga di usia ketujuh belas ini langkahmu selalu ditemani
+                  ketenangan, kesehatan, dan kebahagiaan yang tulus, Quieska
+                  Noor Nisrina."
+                </p>
+
+                <div
+                  class="mt-2.5 pt-2.5 border-t border-purple-300/15 flex flex-col gap-2"
+                >
+                  <p
+                    id="birthday-extra-wish-text"
+                    class="font-serif italic text-xs sm:text-sm text-purple-200/90 leading-snug"
+                  >
+                    "Semoga setiap hal kecil yang kamu sukai—seperti hangatnya
+                    senja dan sayap kupu-kupu—selalu mengingatkanmu bahwa kamu
+                    berarti."
+                  </p>
+                  <div>
+                    <button
+                      id="birthday-next-wish-btn"
+                      type="button"
+                      class="font-serif italic text-xs sm:text-sm text-amber-200/90 hover:text-amber-100 bg-purple-950/50 hover:bg-purple-900/60 border border-purple-300/30 px-3 py-0.5 rounded-full transition-all cursor-pointer"
+                    >
+                      ✦ Bisikkan Harapan Lain
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <p class="font-script text-3xl sm:text-5xl text-purple-200/95">
-          Quieska Noor Nisrina
-        </p>
-
-        <!-- Doa di Bawah Angka -->
-        <div
-          id="birthday-prayer-block"
-          class="prayer-block-reveal mt-5 sm:mt-6 max-w-xl border-t border-amber-200/15 pt-5"
+        <!-- Tombol Tutup di Bawah & di Luar Kartu Popup -->
+        <button
+          id="close-birthday-popup-btn"
+          type="button"
+          aria-label="Tutup popup pesan ulang tahun"
+          class="outside-popup-close-btn"
         >
-          <p
-            class="font-serif italic text-base sm:text-xl text-amber-100/85 leading-relaxed"
-          >
-            "Semoga di usia ketujuh belas ini langkahmu selalu ditemani
-            ketenangan, kesehatan, dan kebahagiaan yang tulus, Quieska Noor
-            Nisrina."
-          </p>
-        </div>
+          <span>✕</span>
+          <span>Tutup Pesan</span>
+        </button>
       </div>
-
-      <!-- Tombol Tutup di Bawah & di Luar Popup -->
-      <button
-        id="close-birthday-popup-btn"
-        type="button"
-        aria-label="Tutup popup pesan ulang tahun"
-        class="outside-popup-close-btn"
-      >
-        <span>✕</span>
-        <span>Tutup Pesan</span>
-      </button>
     </div>
 
     <script>
